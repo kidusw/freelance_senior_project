@@ -1,0 +1,14 @@
+.slide {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  h3 {
+    text-align: center;
+    margin: 40px 0;
+    color: #013914;
+    font-size: 40px;
+  }
+  .container {
+    max-width: 80%;
+  }
+}
