@@ -69,9 +69,8 @@ const App = () => {
     },
   ]);
   return (
-    <div className="p-16">
-      <Test />
-      {/* <RouterProvider router={router} /> */}
+    <div className="m-0 p-0">
+      <RouterProvider router={router} />
     </div>
   );
 };
