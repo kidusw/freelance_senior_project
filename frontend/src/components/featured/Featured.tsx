@@ -1,26 +1,47 @@
-import "./Featured.scss";
+// import "./Featured.scss";
 const Featured = () => {
   return (
-    <div className="featured">
-      <div className="container">
-        <div className="left">
-          <h1>Find the perfect <i>freelance</i> services in <b>Ethiopia</b></h1>
-          <div className="search">
-            <div className="searchInput">
-              <img src="/img/search.png" alt="" />
-              <input type="text" placeholder="Building website" />
+    <div className="flex justify-center items-center my-4 h-[550px] p-5 bg-green-950 text-white lg">
+      <div className="flex items-center lg:w[90%]">
+        <div className="flex flex-col gap-8">
+          <h1 className="text-3xl lg:text-5xl">
+            Find the perfect <i className="font-light">freelance</i> services in{" "}
+            <b className="font-black">Ethiopia</b>
+          </h1>
+          <div className="flex items-center justify-between bg-white rounded-md">
+            <div className="flex items-center gap-3">
+              <img
+                className="w-[20px] h-[20px] m-[10px]"
+                src="/img/search.png"
+                alt=""
+              />
+              <input
+                className="border-none outline-none lg:w-[500px] text-slate-900"
+                type="text"
+                placeholder="Building website"
+              />
             </div>
-            <button>Search</button>
+            <button className="bg-green-600 w-[120px] h-[45px] hover:bg-green-700">
+              Search
+            </button>
           </div>
-          <div className="popular">
-            <span>Popular:</span>
-            <button>Web Design</button>
-            <button>Wordpress</button>
-            <button>Logo Design</button>
-            <button>AI Services</button>
+          <div className="flex flex-wrap lg:items-center gap-3">
+            <span className=" text-lg">Popular:</span>
+            <button className="text-white bg-transparent border border-white px-1 py-2 rounded-2xl cursor-pointer text-sm">
+              Web Design
+            </button>
+            <button className="text-white bg-transparent border border-white px-1 py-2 rounded-2xl cursor-pointer text-sm">
+              Wordpress
+            </button>
+            <button className="text-white bg-transparent border border-white px-1 py-2 rounded-2xl cursor-pointer text-sm">
+              Logo Design
+            </button>
+            <button className="text-white bg-transparent border border-white px-1 py-2 rounded-2xl cursor-pointer text-sm">
+              AI Services
+            </button>
           </div>
         </div>
-        <div className="right">
+        <div className="hidden lg:block">
           <img src="/img/man.png" alt="" />
         </div>
       </div>

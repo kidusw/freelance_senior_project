@@ -100,7 +100,7 @@ const Navbar = () => {
       {(isActive || pathname !== "/") && (
         <div className="hidden lg:block">
           <hr className="bg-slate-850 my-3 w-full" />
-          <div className="lg:flex justify-between  lg:gap-x-2 text-slate-900 text-auto   lg:w-[95%]">
+          <div className="lg:flex justify-center gap-x-5  text-slate-900 text-auto lg:px-3  ">
             <Link className="link" to={"/"}>
               Graphics & Design
             </Link>

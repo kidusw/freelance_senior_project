@@ -1,8 +1,6 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
   Outlet,
 } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
@@ -16,7 +14,7 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import Add from "./pages/add/Add";
-import Test from "./components/Test";
+
 
 const App = () => {
   const Layout = () => {
