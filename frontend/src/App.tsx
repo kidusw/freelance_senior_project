@@ -16,6 +16,7 @@ import MyGigs from "./pages/myGigs/MyGigs";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import Add from "./pages/add/Add";
+import Test from "./components/Test";
 
 const App = () => {
   const Layout = () => {
@@ -68,8 +69,9 @@ const App = () => {
     },
   ]);
   return (
-    <div className="app">
-      <RouterProvider router={router} />
+    <div className="p-16">
+      <Test />
+      {/* <RouterProvider router={router} /> */}
     </div>
   );
 };
