@@ -4,12 +4,17 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
-
+import cors from "cors";
+import bodyParser from "body-parser";
 const app=express();
 dotenv.config();
 
+
+app.use(bodyParser.json());
+app.use(cors({origin:"http://localhost:5173",credentials:true}));
+app.use(cookieParser())
 app.use(cookieParser());
-app.use(express.json());
+
 
 
 const connectDb=async()=>{
@@ -25,6 +30,7 @@ const connectDb=async()=>{
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+
 
 
 

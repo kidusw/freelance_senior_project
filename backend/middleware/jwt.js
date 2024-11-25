@@ -1,29 +1,32 @@
-import createError from "../utils/createError.js";
 import jwt from "jsonwebtoken";
 
-export const verifyToken=(req,res,next)=>{
-    const token=req.cookies.authToken;
-    if(!token) return next(createError(401,"You are not authenticated"));
+// Blacklist for invalidated tokens
+export const tokenBlacklist = new Set();
 
-    jwt.verify(token,process.env.JWT_KEY,async (err,payload)=>{
-        if(err) return next(createError(403,"Token isn't valid"));
-        req.userId=payload.id;
-        req.isSeller=payload.isSeller;
+// Middleware to verify the access token
+export const verifyToken = (req, res, next) => {
+    const token = req.cookies?.token;
+
+    if (!token) {
+        return res.status(403).json({ message: 'Token is required' });
+    }
+
+    // Check blacklist
+    if (tokenBlacklist.has(token)) {
+        return res.status(401).json({ message: 'Token has been invalidated' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        req.user = decoded;
         next();
-    })
+    } catch (err) {
+        res.status(401).json({ message: 'Invalid or expired token' });
+    }
+};
 
-    
-  // const authHeader = req.headers["authorization"];
-  // const token = authHeader && authHeader.split(" ")[1]; // Extract token from "Bearer <token>"
+// Blacklist a token
+export const blacklistToken = (token) => {
+    tokenBlacklist.add(token);
+};
 
-  // if (!token) return res.status(401).json({ error: "Token required" });
-
-  // jwt.verify(token, process.env.JWT_KEY, (err, user) => {
-  //   if (err) return res.status(403).json({ error: "Invalid or expired token" });
-
-  //   req.userId = user.id; // Attach user data to the request
-  //   req.isSeller=user.isSeller;
-  //   next();
-  // });
-
-}
