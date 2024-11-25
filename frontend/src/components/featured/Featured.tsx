@@ -1,7 +1,7 @@
 // import "./Featured.scss";
 const Featured = () => {
   return (
-    <div className="flex justify-center items-center my-4 h-[550px] p-5 bg-green-950 text-white lg">
+    <div className="flex justify-center items-center my-4 h-[600px] p-5 bg-green-950 text-white lg">
       <div className="flex items-center lg:w-[90%]">
         <div className="flex flex-col gap-8">
           <h1 className="text-3xl lg:text-5xl">

@@ -30,8 +30,8 @@ const Navbar = () => {
     <div
       className={
         isActive || pathname !== "/"
-          ? "bg-white text-slate-900 py-3 flex flex-col items-center fixed top-0 w-full right-0 ease-in duration-500"
-          : "bg-green-900 text-white py-3 flex flex-col items-center fixed top-0 w-full right-0 ease-in duration-500"
+          ? "bg-white text-slate-900 py-3 flex flex-col items-center fixed top-0 w-full right-0 ease-in duration-500 z-50"
+          : "bg-green-900 text-white py-3 flex flex-col items-center fixed top-0 w-full right-0 ease-in duration-500 z-50"
       }
     >
       <div className="flex justify-between items-center py-4 w-full px-3 lg:w-[90%]">
