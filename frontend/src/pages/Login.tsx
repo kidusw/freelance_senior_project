@@ -27,11 +27,12 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await apiClient.post("/auth/login", formData, {
+      const res = await apiClient.post("/auth/login", formData, {
         withCredentials: true,
       });
       login();
       alert("Login successful");
+      localStorage.setItem("currentUser", JSON.stringify(res.data["user"]));
       navigate("/");
     } catch (err: any) {
       alert(err.response?.data?.message || "Error logging in");

@@ -37,7 +37,7 @@ export const register=async(req,res)=>{
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword });
+        const newUser = new User({ ...req.body, password: hashedPassword });
         await newUser.save();
 
         res.json({ message: 'User registered successfully' });
@@ -69,8 +69,7 @@ export const login=async(req,res)=>{
 
         res.cookie('token', accessToken, { httpOnly: true, maxAge: process.env.COOKIE_EXPIRATION, sameSite: 'strict' ,secure:false});
         res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'strict' ,secure:false});
-
-        res.json({ message: 'Login successful' });
+        res.json({ message: 'Login successful',user});
     } catch (err) {
         res.status(500).json({ message: 'Server error', error: err.message });
     }

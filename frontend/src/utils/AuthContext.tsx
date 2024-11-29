@@ -6,7 +6,6 @@ interface AuthContextType {
   logout: () => void;
 }
 
-// Create the Auth Context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Auth Provider component

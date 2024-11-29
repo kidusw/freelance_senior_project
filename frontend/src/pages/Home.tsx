@@ -3,7 +3,9 @@ import Featured from "../components/Featred";
 import Features from "../components/Features";
 import Slide from "../components/Slide";
 import apiClient from "../utils/apiClient";
-import { cards } from "../data";
+import { cards, projects } from "../data";
+import ProjSlide from "../components/ProjectSlide";
+
 const Home = () => {
   const [username, setUsername] = useState<string>("");
 
@@ -24,11 +26,13 @@ const Home = () => {
 
   return (
     <div className="px-2">
-      <h1 className="text-3xl font-bold underline text-center">Home</h1>
-      {username && <h2>{username}</h2>}
+      {/* <h1 className="text-3xl font-bold underline text-center">Home</h1> */}
+      {/* {username && <h2>{username}</h2>} */}
+
       <Featured />
       <Slide cards={cards} />
       <Features />
+      <ProjSlide cards={projects} />
     </div>
   );
 };

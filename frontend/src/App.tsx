@@ -1,13 +1,13 @@
 // import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
-// import {
-//   useQuery,
-//   useMutation,
-//   useQueryClient,
-//   QueryClient,
-//   QueryClientProvider,
-// } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -16,8 +16,10 @@ import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import Gig from "./pages/Gig";
+import Gigs from "./pages/Gigs";
 
-// const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 const App = () => {
   const Layout = () => {
@@ -51,6 +53,14 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/gigs",
+      element: <Gigs />,
+    },
+    {
+      path: "/gig/:id",
+      element: <Gig />,
     },
     {
       path: "*", // Catch-all route for unmatched paths
