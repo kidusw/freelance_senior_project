@@ -1,7 +1,7 @@
 import { RiCheckboxCircleLine } from "react-icons/ri";
 const Features = () => {
   return (
-    <div className="bg-green-50 py-10 mt-10">
+    <div className="bg-green-50 py-10 mt-20">
       <div className="lg:w-[90%] mx-auto">
         <div className="flex justify-center lg:justify-between gap-x-10 items-center">
           <div className="left">

@@ -2,7 +2,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CatCard from "./CatCard";
-import { ReactNode } from "react";
 
 interface Cards {
   id: number;
@@ -40,7 +39,7 @@ const Slide = ({ cards }: Props) => {
   };
 
   return (
-    <div className="my-6">
+    <div className="mb-6 mt-20">
       <div className="lg:w-[90%] mx-auto ">
         <h2 className="my-8 text-center text-4xl font-bold text-green-800 underline">
           Categories
