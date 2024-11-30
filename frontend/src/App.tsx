@@ -18,6 +18,8 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import Gig from "./pages/Gig";
 import Gigs from "./pages/Gigs";
+import Message from "./pages/Message";
+import Messages from "./pages/Messages";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,24 @@ const App = () => {
           path: "/profile",
           element: <Profile />,
         },
+
+        {
+          path: "/messages",
+          element: <Messages />,
+        },
+        {
+          path: "/message/:id",
+          element: <Message />,
+        },
+
+        {
+          path: "/gigs",
+          element: <Gigs />,
+        },
+        {
+          path: "/gig/:id",
+          element: <Gig />,
+        },
       ],
     },
     {
@@ -53,14 +73,6 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
-    },
-    {
-      path: "/gigs",
-      element: <Gigs />,
-    },
-    {
-      path: "/gig/:id",
-      element: <Gig />,
     },
     {
       path: "*", // Catch-all route for unmatched paths

@@ -49,10 +49,12 @@ export const getSingleConversation = async (req, res, next) => {
 };
 
 export const getConversations = async (req, res, next) => {
+  const user=req.userData;
   try {
     const conversations = await Conversation.find(
-      req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
+      user.isSeller ? { sellerId: user._id } : { buyerId: user._id }
     ).sort({ updatedAt: -1 });
+    console.log(conversations);
     res.status(200).send(conversations);
   } catch (err) {
     next(err);

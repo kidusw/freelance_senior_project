@@ -41,7 +41,7 @@ const Gigs = () => {
   }, [sort]);
 
   return (
-    <div className="gigs">
+    <div className="my-10">
       <div className="container">
         <span className="breadcrumbs">Liverr Graphics & Design</span>
         <h1>AI Artists</h1>

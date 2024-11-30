@@ -12,7 +12,7 @@ interface Gig {
   starNumber: number;
   cat: string;
   cover: string;
-  img: string[];
+  img: string;
   id: number;
   shortTitle: string;
   shortDesc: string;
