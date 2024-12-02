@@ -4,11 +4,12 @@ interface Props {
   title: string;
   desc: string;
   img: string;
+  shortDesc: string;
 }
 
-const CatCard = ({ title, desc, img }: Props) => {
+const CatCard = ({ title, desc, img, shortDesc }: Props) => {
   return (
-    <Link to={`/gigs/?cat=design}`}>
+    <Link to={`/gigs/?cat=${shortDesc}`}>
       <div className="catCard w-[252px] h-[344px] text-white rounded-md cursor-pointer relative">
         <img
           className="w-full h-full object-cover rounded-md brightness-75"

@@ -24,10 +24,11 @@ import Gig from "../models/gigmodel.js";
 // }
 
 export const getOrders=async(req,res,next)=>{
+    const user=req.userData;
     try {
         const orders=await Order.find({
-            ...(req.isSeller ? {sellerId:req.userId}:{buyerId:req.userId}),
-            isCompleted:true,
+            ...(user.isSeller ? {sellerId:user._id}:{buyerId:user._id}),
+            isCompleted:false,
         })
         res.status(200).send(orders);
     } catch (error) {

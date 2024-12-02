@@ -6,6 +6,7 @@ import { useAuth } from "../utils/AuthContext";
 import apiClient from "../utils/apiClient";
 
 interface User {
+  _id: string;
   username: string;
   email: string;
   password: string;
@@ -101,7 +102,10 @@ const Navbar = () => {
               >
                 {isSeller && (
                   <>
-                    <Link className="link" to="/gigs">
+                    <Link
+                      className="link"
+                      to={`/gigs/?userId=${currentUser?._id}`}
+                    >
                       Gigs
                     </Link>
                     <Link className="link" to="/add">

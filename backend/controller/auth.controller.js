@@ -6,7 +6,7 @@ import User from "../models/usermodel.js";
 
 
 const refreshTokens = new Set();
-const ACCESS_TOKEN_EXPIRATION = '15m'; // Short-lived access token
+const ACCESS_TOKEN_EXPIRATION = '1hr'; // Short-lived access token
 const REFRESH_TOKEN_EXPIRATION = '7d'; // Long-lived refresh token
 
 // Generate tokens

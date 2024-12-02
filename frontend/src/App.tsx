@@ -20,6 +20,8 @@ import Gig from "./pages/Gig";
 import Gigs from "./pages/Gigs";
 import Message from "./pages/Message";
 import Messages from "./pages/Messages";
+import Orders from "./pages/Orders";
+import Add from "./pages/AddGig";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +48,14 @@ const App = () => {
           path: "/profile",
           element: <Profile />,
         },
-
+        {
+          path: "/orders",
+          element: <Orders />,
+        },
+        {
+          path: "/add",
+          element: <Add />,
+        },
         {
           path: "/messages",
           element: <Messages />,

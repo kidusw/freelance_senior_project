@@ -50,7 +50,7 @@ function Gig() {
   if (isError) return <p>Failed to load gig details.</p>;
   if (isLoadingUser) return <p>Loading user details...</p>;
   if (errorUser) return <p>Failed to load user details.</p>;
-
+  console.log(dataUser);
   const averageStars = data?.starNumber
     ? Math.round(data.totalStars / data.starNumber)
     : 0;

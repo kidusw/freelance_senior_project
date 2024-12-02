@@ -4,6 +4,21 @@ import apiClient from "../utils/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 
+interface GigData {
+  _id: string;
+  userId: string;
+  title: string;
+  images: string[];
+  desc: string;
+  totalStars: number;
+  starNumber: number;
+  price: number;
+  deliveryTime: number;
+  revisionNumber: number;
+  features: string[];
+  shortTitle: string;
+}
+
 const Gigs = () => {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
@@ -16,11 +31,11 @@ const Gigs = () => {
     const min = minRef.current?.value || 0;
     const max = maxRef.current?.value || 10000;
     return apiClient
-      .get(`/gigs?${search}&min=${min}&max=${max}&sort=${sort}`)
+      .get(`/gigs${search}&min=${min}&max=${max}&sort=${sort}`)
       .then((res) => res.data);
   };
 
-  const { isLoading, isError, data, error, refetch } = useQuery({
+  const { isLoading, isError, data, error, refetch } = useQuery<GigData[]>({
     queryKey: ["gigs", sort, search],
     queryFn: fetchGigs,
   });
@@ -85,7 +100,7 @@ const Gigs = () => {
             ? "Loading..."
             : isError
             ? `Error: ${error.message || "Something went wrong"}`
-            : data.map((gig: any) => <GigCard key={gig.id} item={gig} />)}
+            : data?.map((gig: GigData) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ interface Cards {
   title: string;
   desc: string;
   img: string;
+  keyword: string;
 }
 interface Props {
   cards?: Cards[] | any[];
@@ -53,6 +54,7 @@ const Slide = ({ cards }: Props) => {
                 title={card.title}
                 desc={card.desc}
                 img={card.img}
+                shortDesc={card.keyword}
               />
             ))}
         </Slider>

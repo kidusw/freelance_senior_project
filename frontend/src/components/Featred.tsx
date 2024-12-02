@@ -1,5 +1,13 @@
-// import "./Featured.scss";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Featured = () => {
+  const [searchInput, setInput] = useState();
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    navigate(`/gigs?search=${searchInput}`);
+  };
+  console.log(searchInput);
   return (
     <div className="flex justify-center items-center my-4 h-[600px] p-5 bg-green-950 text-white lg">
       <div className="flex items-center lg:w-[90%]">
@@ -19,9 +27,13 @@ const Featured = () => {
                 className="border-none outline-none lg:w-[500px] text-slate-900"
                 type="text"
                 placeholder="Building website"
+                onChange={(e: any) => setInput(e.target.value)}
               />
             </div>
-            <button className="bg-green-600 w-[120px] h-[45px] hover:bg-green-700">
+            <button
+              className="bg-green-600 w-[120px] h-[45px] hover:bg-green-700"
+              onClick={handleSubmit}
+            >
               Search
             </button>
           </div>
@@ -42,7 +54,7 @@ const Featured = () => {
           </div>
         </div>
         <div className="hidden lg:block">
-          <img src="/img/man.png" alt="" />
+          <img src="/img/man2.jpg" alt="" />
         </div>
       </div>
     </div>
