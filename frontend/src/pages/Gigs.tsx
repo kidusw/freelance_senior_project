@@ -61,8 +61,8 @@ const Gigs = () => {
         <p className="text-gray-600 font-medium">
           Explore the boundaries of art and technology with Liverr's AI artists.
         </p>
-        <div className="menu flex items-center justify-between">
-          <div className="left flex items-center gap-3 text-gray-500 font-medium">
+        <div className="menu flex items-center justify-between flex-wrap">
+          <div className="left flex items-center flex-wrap gap-3 text-gray-500 font-medium">
             <span>Budget</span>
             <input
               className="p-1 border border-gray-300 outline-none placeholder:text-gray-500"

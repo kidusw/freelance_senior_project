@@ -26,7 +26,7 @@ const GigCard = ({ item }: Props) => {
           </div>
           <p className="text-gray-900 ">{item.desc}</p>
           <div className="star flex gap-1">
-            <img className="w-4 h-4" src="/pulbic/star.png" alt="" />
+            <img className="w-4 h-4" src="/public/img/star.png" alt="" />
             <span className="text-[14px] font-semibold text-orange-400">
               {item.star}
             </span>
