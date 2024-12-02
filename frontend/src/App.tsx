@@ -18,6 +18,11 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import Gig from "./pages/Gig";
 import Gigs from "./pages/Gigs";
+import MyGigs from "./pages/MyGigs";
+import Orders from "./pages/Orders";
+import Messages from "./pages/Messages";
+import Message from "./pages/Message";
+import Add from "./pages/Add";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +49,28 @@ const App = () => {
           path: "/profile",
           element: <Profile />,
         },
+        {
+          path: "/mygigs",
+          element: <MyGigs />
+        },
+        {
+          path: "/orders",
+          element: <Orders />
+        },
+        {
+          path: "/messages",
+          element: <Messages />
+        },
+        {
+          path: "/message/:id",
+          element: <Message />
+        },
+        {
+          path: "/add",
+          element: <Add />
+        }
+
+      
       ],
     },
     {
