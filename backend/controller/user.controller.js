@@ -21,3 +21,29 @@ export const getUser=async(req,res,next)=>{
       
 }
 
+export const editUser=async(req,res)=>{
+ 
+  const { username, email, img } = req.body;
+
+  try {
+    const updatedFields = {};
+    if (username) updatedFields.username = username;
+    if (email) updatedFields.email = email;
+    if (img) updatedFields.img = img;
+
+    const user = await User.findByIdAndUpdate(
+      req.userData._id,
+      { $set: updatedFields },
+      { new: true, runValidators: true } 
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "Profile updated successfully", user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+}

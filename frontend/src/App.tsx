@@ -23,8 +23,6 @@ import Messages from "./pages/Messages";
 import Orders from "./pages/Orders";
 import Add from "./pages/AddGig";
 
-const queryClient = new QueryClient();
-
 const App = () => {
   const Layout = () => {
     return (
@@ -91,12 +89,3 @@ const App = () => {
   return <RouterProvider router={router} />;
 };
 export default App;
-
-//  <Router>
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/login" element={<Login />} />
-//         <Route path="/profile" element={<Profile />} />
-//       </Routes>
-//     </Router>

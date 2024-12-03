@@ -1,57 +1,68 @@
 import { useState, useEffect } from "react";
 import apiClient from "../utils/apiClient";
+import { useNavigate } from "react-router-dom";
+import upload from "../utils/upload";
 
 interface Profile {
+  _id: string;
   username: string;
   email: string;
   img: string;
 }
 
 const Profile = () => {
-  const [profile, setProfile] = useState<Profile>({
-    username: "",
-    email: "",
-    img: "",
-  });
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [image, setImage] = useState<string>("");
-  const [isSeller, setSeller] = useState<string>("");
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [isEditing, setEditing] = useState(false);
+  const [updatedProfile, setUpdatedProfile] = useState<Partial<Profile>>({});
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
 
-  const [isEditing, setEditing] = useState<boolean>(false);
+  // Fetch the profile
   const fetchProfile = async () => {
     try {
       const response = await apiClient.get("/auth/profile", {
         withCredentials: true,
       });
-      console.log(response.data.user);
       setProfile(response.data.user);
-      setUsername(response.data.user.username);
-      setEmail(response.data.user.email);
-      setImage(response.data.user.email);
-      setSeller(response.data.user.isSeller);
     } catch (err: any) {
       setError(err.response?.data?.message || "Error fetching profile");
     }
   };
-  const handleEdit = () => {
-    setEditing(!isEditing);
+
+  // Handle input changes for editing
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUpdatedProfile((prev) => ({ ...prev, [name]: value }));
   };
-  const handleSave = () => {
-    setEditing(!isEditing);
+
+  const handleFile = (e: any) => {
+    setFile(e.target.files[0]);
   };
-  console.log(username);
-  //   const fetchAdminData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/api/auth/admin", {
-  //         withCredentials: true,
-  //       });
-  //       alert(response.data.message);
-  //     } catch (err:any) {
-  //       alert(err.response?.data?.message || "You do not have admin access");
-  //     }
-  //   };
+
+  // Submit updated profile data
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const url = await upload(file);
+    try {
+      const response = await apiClient.put(
+        "/users/edit",
+        { ...updatedProfile, img: url },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("Profile updated successfully:", response.data);
+      setProfile(response.data.user); // Update the local state with the updated profile
+      setEditing(false); // Exit editing mode
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Error updating profile");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchProfile();
@@ -68,10 +79,11 @@ const Profile = () => {
   return (
     <div className="my-40">
       <h2>Welcome, {profile.username}</h2>
-      <h2>Email:{profile.email}</h2>
+      <h2>Email: {profile.email}</h2>
+
       <img
-        src={profile.img}
-        alt="no image"
+        src={profile.img || "/default-avatar.png"}
+        alt="Profile"
         style={{
           height: 50,
           width: 50,
@@ -80,17 +92,42 @@ const Profile = () => {
         }}
       />
       {!isEditing ? (
-        <input type="text" name="username" value={profile.username} disabled />
+        <>
+          <input type="text" value={profile.username} disabled />
+          <button onClick={() => setEditing(true)}>Edit</button>
+        </>
       ) : (
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(e: any) => setUsername(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            value={updatedProfile.username || profile.username}
+            onChange={handleChange}
+            placeholder="Username"
+          />
+          <input
+            type="email"
+            name="email"
+            value={updatedProfile.email || profile.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+          <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+            Profile Picture
+          </label>
+          <input
+            type="file"
+            onChange={handleFile}
+            className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+          />
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Saving..." : "Save"}
+          </button>
+          <button type="button" onClick={() => setEditing(false)}>
+            Cancel
+          </button>
+        </form>
       )}
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={handleSave}>Save</button>
     </div>
   );
 };
