@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import apiClient from "../utils/apiClient";
 
 interface User {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   password: string;
@@ -61,7 +61,7 @@ const Message = () => {
 
     mutation.mutate({
       conversationId: id,
-      userId: currentUser?.id || "", // Add userId if required
+      userId: currentUser?._id || "", // Add userId if required
       desc,
     });
 
@@ -69,9 +69,9 @@ const Message = () => {
   };
 
   return (
-    <div className="message">
-      <div className="container">
-        <span className="breadcrumbs">
+    <div className="message flex justify-center">
+      <div className="container lg:w-[90%] m-12">
+        <span className="breadcrumbs font-light text-xs text-gray-500">
           <Link to="/messages">Messages</Link> John Doe
         </span>
         {isLoading ? (
@@ -79,25 +79,44 @@ const Message = () => {
         ) : error ? (
           "error"
         ) : (
-          <div className="messages">
+          <div className="messages my-7 p-12 flex flex-col gap-20 h-[500px] overflow-scroll">
             {data?.map((m: Message) => (
               <div
-                className={m.userId === currentUser?.id ? "owner item" : "item"}
+                className={
+                  m.userId === currentUser?._id
+                    ? "item owner flex gap-5 max-w-[600px] text-xl flex-row-reverse self-end"
+                    : "item flex gap-5 max-w-[600px] text-xl"
+                }
                 key={m.conversationId}
               >
                 <img
+                  className="w-12 h-12 rounded-[50%]"
                   src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
                 />
-                <p>{m.desc}</p>
+                <p className="p-5 bg-gray-100 rounded-e-lg">{m.desc}</p>
               </div>
             ))}
           </div>
         )}
-        <hr />
-        <form className="write" onSubmit={handleSubmit}>
-          <textarea typeof="text" placeholder="write a message" />
-          <button type="submit">Send</button>
+        <hr className="h-0 border-[0.5px] my-5" />
+        <form
+          className="write flex items-center justify-between"
+          onSubmit={handleSubmit}
+        >
+          <textarea
+            typeof="text"
+            cols={30}
+            rows={10}
+            className="w-[80%] h-[100px] p-3 border border-gray-200"
+            placeholder="write a message"
+          />
+          <button
+            type="submit"
+            className="bg-green-500 text-white p-5 font-medium rounded-md w-[100px]"
+          >
+            Send
+          </button>
         </form>
       </div>
     </div>

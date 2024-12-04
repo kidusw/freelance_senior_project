@@ -22,6 +22,7 @@ import Message from "./pages/Message";
 import Messages from "./pages/Messages";
 import Orders from "./pages/Orders";
 import Add from "./pages/AddGig";
+import MyGigs from "./pages/mygigs";
 
 const App = () => {
   const Layout = () => {
@@ -62,7 +63,10 @@ const App = () => {
           path: "/message/:id",
           element: <Message />,
         },
-
+        {
+          path: "/myGigs",
+          element: <MyGigs />,
+        },
         {
           path: "/gigs",
           element: <Gigs />,

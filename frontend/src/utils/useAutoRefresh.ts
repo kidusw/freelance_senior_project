@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import apiClient from './apiClient';
 
 const useAutoRefresh = () => {
+    
     useEffect(() => {
         const interval = setInterval(async () => {
             try {
@@ -11,7 +12,7 @@ const useAutoRefresh = () => {
                 console.error('Token refresh failed:', error.message);
                 clearInterval(interval); // Stop refreshing on failure
             }
-        }, 10 * 60 * 1000); // Refresh every 10 minutes
+        }, 30 * 60 * 1000); // Refresh every 30 minutes
 
         return () => clearInterval(interval); // Cleanup on component unmount
     }, []);

@@ -59,38 +59,33 @@ const Messages = () => {
   };
 
   return (
-    <div className="my-40">
+    <div className="myGigs flex justify-center mt-20">
       {isLoading ? (
         "loading"
       ) : error ? (
         <div>Error fetching data</div>
       ) : (
         <>
-          <div>
-            <h1>Messages</h1>
+          <div className="title flex items-center justify-between">
+            <h1 className="text-2xl my-5 font-bold">Messages</h1>
           </div>
-          <table>
+          <table className="w-full table-auto h-full">
             <thead>
-              <tr>
-                <th>{currentUser?.isSeller ? "Buyer" : "Seller"}</th>
-                <th>Last Message</th>
-                <th>Date</th>
-                <th>Action</th>
+              <tr className="mb-6 ">
+                <th className="text-left">
+                  {currentUser?.isSeller ? "Buyer" : "Seller"}
+                </th>
+                <th className="text-left">Last Message</th>
+                <th className="text-left">Date</th>
+                <th className="text-left">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="space-x-3">
               {data?.map((c) => (
-                <tr
-                  className={
-                    ((currentUser?.isSeller && !c.readBySeller) ||
-                      (!currentUser?.isSeller && !c.readByBuyer)) &&
-                    "active"
-                  }
-                  key={c.id}
-                >
+                <tr className="even:bg-blue-50" key={c.id}>
                   <td>{currentUser?.isSeller ? c.buyerId : c.sellerId}</td>
                   <td>
-                    <Link to={`/message/${c.id}`} className="link">
+                    <Link className="max-w-[360px]" to={`/message/${c.id}`}>
                       {c?.lastMessage?.substring(0, 100) || "No message"}...
                     </Link>
                   </td>
@@ -102,7 +97,10 @@ const Messages = () => {
                   <td>
                     {((currentUser?.isSeller && !c.readBySeller) ||
                       (!currentUser?.isSeller && !c.readByBuyer)) && (
-                      <button onClick={() => handleRead(c.id)}>
+                      <button
+                        className="py-2 px-3 text-white bg-green-500 hover:bg-green-400 cursor-pointer"
+                        onClick={() => handleRead(c.id)}
+                      >
                         Mark as Read
                       </button>
                     )}

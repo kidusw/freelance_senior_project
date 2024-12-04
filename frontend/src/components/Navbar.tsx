@@ -104,7 +104,8 @@ const Navbar = () => {
                   <>
                     <Link
                       className="link"
-                      to={`/gigs/?userId=${currentUser?._id}`}
+                      to={"/mygigs"}
+                      // to={`/gigs/?userId=${currentUser?._id}`}
                     >
                       Gigs
                     </Link>
