@@ -28,7 +28,7 @@ export const getOrders=async(req,res,next)=>{
     try {
         const orders=await Order.find({
             ...(user.isSeller ? {sellerId:user._id}:{buyerId:user._id}),
-            isCompleted:false,
+            isCompleted:true,
         })
         res.status(200).send(orders);
     } catch (error) {
