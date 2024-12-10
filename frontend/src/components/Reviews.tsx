@@ -44,8 +44,8 @@ const Reviews: React.FC<ReviewsProps> = ({ gigId }) => {
   };
 
   return (
-    <div className="reviews">
-      <h2>Reviews</h2>
+    <div className="reviews mt-12">
+      <h2 className="text-2xl">Reviews</h2>
       {isLoading
         ? "Loading..."
         : error
