@@ -1,10 +1,13 @@
 import Review from "../models/reviewmodel.js";
 import createError from "../utils/createError.js"
 import Gig from "../models/gigmodel.js";
+
 export const createReview=async(req,res,next)=>{
+      console.log("Request Body:", req.body);
+     const user=req.userData;
      if(req.isSeller) return next(createError(403,"Sellers can't create a review"))
         const newReview=new Review({
-    userId:req.userId,
+    userId:user._id,
     gigId:req.body.gigId,
     desc:req.body.desc,
     star:req.body.star,
@@ -15,6 +18,9 @@ export const createReview=async(req,res,next)=>{
        if(review) return next(createError(403,"You have already created a review"));
         await Gig.findByIdAndUpdate(req.body.gigId,{$inc:{totalStars:req.body.star,starNumber:1}})
         const savedReview=await newReview.save();
+      
+
+
         res.status(201).send(savedReview);
 
     } catch (error) {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Add = () => {
   const [singleFile, setSingleFile] = useState<File | null>(null);
+  const [featureInput, setFeatureInput] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
 
@@ -42,22 +43,24 @@ const Add = () => {
   };
 
   // Handle adding a feature
-  const handleFeature = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const featureInput = e.currentTarget.elements.namedItem(
-      "feature"
-    ) as HTMLInputElement;
-    const feature = featureInput.value.trim();
+
+  const handleFeatureInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFeatureInput(e.target.value);
+  };
+
+  // Add feature to the list
+  const handleAddFeature = () => {
+    const feature = featureInput.trim();
     if (feature) {
       setGigData((prev) => ({
         ...prev,
         features: [...prev.features, feature],
       }));
-      featureInput.value = ""; // Clear input
+      setFeatureInput(""); // Clear the input
     }
   };
 
-  // Remove feature
+  // Remove a feature
   const handleRemoveFeature = (feature: string) => {
     setGigData((prev) => ({
       ...prev,
@@ -110,15 +113,19 @@ const Add = () => {
     e.preventDefault();
     mutation.mutate(gigData);
   };
-
+  console.log(gigData.features[0]);
   return (
-    <div className="add">
-      <div className="container">
-        <h1>Add New Gig</h1>
-        <form className="sections" onSubmit={handleSubmit}>
-          <div className="info">
+    <div className="add mt-32 flex justify-center ">
+      <div className="container lg:w-[80%] py-12 px-0">
+        <h1 className="text-gray-500 font-light text-3xl mb-7">Add New Gig</h1>
+        <form
+          className="sections flex justify-around w-full flex-wrap"
+          onSubmit={handleSubmit}
+        >
+          <div className="info flex flex-col gap-3 justify-between ">
             <label htmlFor="title">Title</label>
             <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               type="text"
               name="title"
               id="title"
@@ -166,6 +173,7 @@ const Add = () => {
 
             <label htmlFor="desc">Description</label>
             <textarea
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               name="desc"
               id="desc"
               placeholder="Brief description to introduce your service"
@@ -176,9 +184,10 @@ const Add = () => {
             ></textarea>
           </div>
 
-          <div className="details">
+          <div className="details flex flex-col gap-3 justify-between">
             <label htmlFor="shortTitle">Service Title</label>
             <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               type="text"
               name="shortTitle"
               id="shortTitle"
@@ -190,6 +199,7 @@ const Add = () => {
 
             <label htmlFor="shortDesc">Short Description</label>
             <textarea
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               name="shortDesc"
               id="shortDesc"
               placeholder="Short description of your service"
@@ -201,6 +211,7 @@ const Add = () => {
 
             <label htmlFor="deliveryTime">Delivery Time (days)</label>
             <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               type="number"
               name="deliveryTime"
               id="deliveryTime"
@@ -212,6 +223,7 @@ const Add = () => {
 
             <label htmlFor="revisionNumber">Revision Number</label>
             <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               type="number"
               name="revisionNumber"
               id="revisionNumber"
@@ -221,22 +233,29 @@ const Add = () => {
               required
             />
 
-            <form onSubmit={handleFeature}>
-              <label htmlFor="feature">Add Features</label>
-              <input
-                type="text"
-                id="feature"
-                name="feature"
-                placeholder="e.g. page design"
-              />
-              <button type="submit">Add</button>
-            </form>
+            <label htmlFor="feature">Add Features</label>
+            <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
+              type="text"
+              id="feature"
+              name="feature"
+              placeholder="e.g. page design"
+              value={featureInput}
+              onChange={handleFeatureInputChange}
+            />
+            <button type="submit" onClick={handleAddFeature}>
+              Add
+            </button>
 
             <div className="addedFeatures">
-              {gigData.features.map((f) => (
-                <div className="item" key={f}>
-                  {f}
-                  <button type="button" onClick={() => handleRemoveFeature(f)}>
+              {gigData.features.map((f, index) => (
+                <div className="item flex items-center" key={index}>
+                  <span>{f}</span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveFeature(f)}
+                    className="ml-2 text-red-500"
+                  >
                     X
                   </button>
                 </div>
@@ -245,6 +264,7 @@ const Add = () => {
 
             <label htmlFor="price">Price ($)</label>
             <input
+              className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
               type="number"
               name="price"
               id="price"

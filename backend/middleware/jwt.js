@@ -15,12 +15,13 @@ export const verifyToken = async(req, res, next) => {
     if (tokenBlacklist.has(token)) {
         return res.status(401).json({ message: 'Token has been invalidated' });
     }
-
+    console.log("token from jwt",token);
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         req.user = decoded;
          req.userId = decoded.id;
           const user = await User.findById(req.userId);
+          
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

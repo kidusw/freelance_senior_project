@@ -81,19 +81,28 @@ const Navbar = () => {
           <span>Business</span>
           <span>Explore</span>
           <span>English</span>
-          {!isLoggedIn && <span>Sign in</span>}
-          {!isSeller && <span>Become a Seller</span>}
-          {!isLoggedIn && <button>Join</button>}
+          {!isLoggedIn && <Link to="/login">Sign in</Link>}
+          {!isSeller && isLoggedIn && <span>Become a Seller</span>}
+          {!isLoggedIn && <Link to="/register">Join</Link>}
           {isLoggedIn && (
             <div
               className="flex ml-2 gap-x-2 cursor-pointer"
               onClick={() => setOpen(!open)}
             >
-              <img
-                className="w-8 h-8 rounded-md"
-                src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png"
-                alt=""
-              />
+              {isLoggedIn ? (
+                <img
+                  src={currentUser?.img || "../../public/img/noavatar.jpg"}
+                  className="w-8 h-8 rounded-md"
+                  alt="profile-image"
+                />
+              ) : (
+                <img
+                  className="w-8 h-8 rounded-md"
+                  src="https://cdn-icons-png.flaticon.com/128/3135/3135715.png"
+                  alt=""
+                />
+              )}
+
               <span className="text-md font-bold">{currentUser?.username}</span>
               <div
                 className={`absolute top-12 right-2 bg-white p-3 rounded-md text-slate-700 text-md w-56 ${
@@ -102,12 +111,8 @@ const Navbar = () => {
               >
                 {isSeller && (
                   <>
-                    <Link
-                      className="link"
-                      to={"/mygigs"}
-                      // to={`/gigs/?userId=${currentUser?._id}`}
-                    >
-                      Gigs
+                    <Link className="link" to="/mygigs">
+                      My Gigs
                     </Link>
                     <Link className="link" to="/add">
                       Add new gig

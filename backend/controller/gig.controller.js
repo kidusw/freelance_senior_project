@@ -3,20 +3,39 @@ import createError from "../utils/createError.js";
 
 
 export const createGig=async(req,res,next)=>{
-    if(!req.isSeller) return next(createError(403,"only sellers can create a gig"));
-
+    // if(!req.isSeller) return next(createError(403,"only sellers can create a gig"));
+      const user=req.userData;
+      console.log("body",user._id);
+    console.log(req.body);
     const newGig=new Gig({
-        userId:req.userId,
         ...req.body,
+        userId:user._id,
     });
-
+console.log("new gig",newGig);
     try {
         const savedGig=await newGig.save();
+        console.log(savedGig)
         res.status(201).json(savedGig);
     }catch (error) {
       next(error);  
     }
 }   
+
+
+export const editGig = async(req,res,next)=>{
+    const updatedData=req.body;
+    const gigId=req.params.id;
+   
+    try {
+        const updatedGig=await Gig.findOneAndUpdate({_id:gigId},
+            {$set:updatedData},
+            {new:true});
+       
+    } catch (error) {
+        
+    }
+}
+
 export const deleteGig=async(req,res,next)=>{
     try {
         const gig=await Gig.findById(req.params.id);

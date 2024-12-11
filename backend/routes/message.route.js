@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  createMessage,
+   createMessage,
   getMessages,
 } from "../controller/message.controller.js";
 import { verifyToken } from "../middleware/jwt.js";

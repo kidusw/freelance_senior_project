@@ -56,127 +56,125 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto font-[sans-serif] p-6">
-      <div className="mb-16">
-        <h3 className="text-gray-800 text-2xl font-bold">Create an account</h3>
-      </div>
-      {isLoading ? (
-        <div className="text-center">
-          <h4 className="text-gray-600 text-lg">Creating account...</h4>
-          <span className="spinner-6 block w-8 h-8 rounded-full bg-black animate-ping"></span>
+    <div className=" bg-gradient-to-r from-teal-200 to-teal-500 w-[70%] mx-auto m-10 rounded-lg">
+      <div className="max-w-[600px] mx-auto font-[sans-serif] p-6 mt-20 flex flex-col item-center">
+        <div className="mb-16 self-center">
+          `<h3 className="text-white text-2xl font-bold">Create an account</h3>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="grid sm:grid-cols gap-8">
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Username
-              </label>
-              <input
-                name="username"
-                type="text"
-                placeholder="johndoe"
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Email
-              </label>
-
-              <input
-                name="email"
-                type="email"
-                placeholder="email"
-                onChange={handleChange}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Password
-              </label>
-              <input
-                name="password"
-                type="password"
-                onChange={handleChange}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Profile Picture
-              </label>
-              <input
-                type="file"
-                onChange={handleFile}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Country
-              </label>
-              <input
-                name="country"
-                type="text"
-                placeholder="Usa"
-                onChange={handleChange}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Activate the seller account
-              </label>
-              {sellerButton ? (
-                <BsToggle2On onClick={handleSeller} />
-              ) : (
-                <BsToggleOff onClick={handleSeller} />
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Phone Number
-              </label>
-              <input
-                name="phone"
-                type="text"
-                placeholder="+1 234 567 89"
-                onChange={handleChange}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-            <div>
-              <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
-                Description
-              </label>
-
-              <textarea
-                placeholder="A short description of yourself"
-                name="desc"
-                id=""
-                cols={30}
-                rows={10}
-                onChange={handleChange}
-                className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-            >
-              Register
-            </button>
+        {isLoading ? (
+          <div className="text-">
+            <h4 className="text-gray-600 text-lg text-center">
+              Creating account...
+            </h4>
+            <span className="spinner-6 block w-8 h-8 rounded-full bg-black animate-ping"></span>
           </div>
-        </form>
-      )}
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="grid sm:grid-cols gap-8">
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Username
+                </label>
+                <input
+                  name="username"
+                  type="text"
+                  placeholder="johndoe"
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Email
+                </label>
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="email"
+                  onChange={handleChange}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Password
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  onChange={handleChange}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Profile Picture
+                </label>
+                <input
+                  type="file"
+                  onChange={handleFile}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Country
+                </label>
+                <input
+                  name="country"
+                  type="text"
+                  placeholder="Usa"
+                  onChange={handleChange}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Activate the seller account
+                </label>
+                {sellerButton ? (
+                  <BsToggle2On onClick={handleSeller} />
+                ) : (
+                  <BsToggleOff onClick={handleSeller} />
+                )}
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Phone Number
+                </label>
+                <input
+                  name="phone"
+                  type="text"
+                  placeholder="+1 234 567 89"
+                  onChange={handleChange}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                  Description
+                </label>
+                <textarea
+                  placeholder="A short description of yourself"
+                  name="desc"
+                  id=""
+                  cols={30}
+                  rows={10}
+                  onChange={handleChange}
+                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                />
+              </div>
+              <button
+                type="submit"
+                className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

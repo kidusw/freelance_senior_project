@@ -18,7 +18,7 @@ const Home = () => {
         console.log(response.data.user);
         setUsername(response.data.user.username);
       } catch (error: any) {
-        alert(error.response?.data?.message || "An error occurred");
+        console.log(error.response?.data?.message || "An error occurred");
       }
     };
     getUserData();

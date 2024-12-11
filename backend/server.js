@@ -8,7 +8,7 @@ import gigRoute from "./routes/gig.route.js";
 import orderRoute from "./routes/order.route.js"
 import conversationRoute from "./routes/conversation.route.js";
 import messageRoute from "./routes/message.route.js";
-import reviewRoute from "./routes/message.route.js";
+import reviewRoute from "./routes/review.route.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 const app=express();

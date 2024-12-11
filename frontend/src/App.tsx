@@ -22,9 +22,14 @@ import Message from "./pages/Message";
 import Messages from "./pages/Messages";
 import Orders from "./pages/Orders";
 import Add from "./pages/AddGig";
-import MyGigs from "./pages/mygigs";
+import MyGigs from "./pages/MyGigs";
+import useAutoRefresh from "./utils/useAutoRefresh";
+import Payment from "./pages/Payment";
+import ProtectedRoute from "./utils/ProtectedRoutes";
+import SingleGig from "./pages/SingleGig";
 
 const App = () => {
+  useAutoRefresh();
   const Layout = () => {
     return (
       <div className="app">
@@ -75,19 +80,30 @@ const App = () => {
           path: "/gig/:id",
           element: <Gig />,
         },
+
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/singlegig/:id",
+          element: <SingleGig />,
+        },
       ],
     },
-    {
-      path: "/register",
-      element: <Register />,
-    },
+
     {
       path: "/login",
       element: <Login />,
     },
+
     {
       path: "*", // Catch-all route for unmatched paths
       element: <NotFound />,
+    },
+    {
+      path: "/payment/:id",
+      element: <Payment />,
     },
   ]);
   return <RouterProvider router={router} />;

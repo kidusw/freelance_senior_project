@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GigCard from "../components/GigCard";
 import apiClient from "../utils/apiClient";
 import { useQuery } from "@tanstack/react-query";
@@ -56,12 +56,12 @@ const Gigs = () => {
   }, [sort]);
 
   return (
-    <div className="gigs flex justify-center">
+    <div className="my-10 gigs flex justify-center lg:mt-32">
       <div className="container lg:w-[90%] py-7 px-0 flex flex-col gap-4">
         <span className="breadcrumbs text-xs text-gray-500">
           Liverr Graphics & Design
         </span>
-        <h1>AI Artists</h1>
+        <h1 className="text-3xl">AI Artists</h1>
         <p className="text-gray-600 font-medium">
           Explore the boundaries of art and technology with Liverr's AI artists.
         </p>
@@ -90,8 +90,8 @@ const Gigs = () => {
             </button>
           </div>
           <div className="right flex items-center gap-2 relative">
-            <span className="sortBy text-gray-500 ">Sort by</span>
-            <span className="sortType font-medium">
+            <span className="sortBy text-gray-500">Sort by</span>
+            <span className="sortType">
               {sort === "sales" ? "Best Selling" : "Newest"}
             </span>
             <img
@@ -103,8 +103,8 @@ const Gigs = () => {
             {open && (
               <div
                 className="rightMenu p-5 bg-white rounded-sm border
-                             border-gray-200 absolute top-[30px] right-0 flex flex-col
-                              gap-5 text-gray-600"
+              border-gray-200 absolute top-[30px] right-0 flex flex-col
+               gap-5 text-gray-600"
               >
                 <span
                   className="cursor-pointer"

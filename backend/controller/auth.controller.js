@@ -6,7 +6,7 @@ import User from "../models/usermodel.js";
 
 
 const refreshTokens = new Set();
-const ACCESS_TOKEN_EXPIRATION = '1hr'; // Short-lived access token
+const ACCESS_TOKEN_EXPIRATION = '5m'; // Short-lived access token
 const REFRESH_TOKEN_EXPIRATION = '7d'; // Long-lived refresh token
 
 // Generate tokens
@@ -67,7 +67,7 @@ export const login=async(req,res)=>{
 
         refreshTokens.add(refreshToken); // Store refresh token
 
-        res.cookie('token', accessToken, { httpOnly: true, maxAge: process.env.COOKIE_EXPIRATION, sameSite: 'strict' ,secure:false});
+        res.cookie('token', accessToken, { httpOnly: true, maxAge: 5 * 60 * 1000, sameSite: 'strict' ,secure:false});
         res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: 'strict' ,secure:false});
         res.json({ message: 'Login successful',user});
     } catch (err) {
@@ -78,7 +78,7 @@ export const login=async(req,res)=>{
 // Refresh Token
 export const refreshToken = async (req, res) => {
    const refreshToken = req.cookies?.refreshToken;
-
+    console.log("refresh token",refreshToken);
     if (!refreshToken) {
         return res.status(403).json({ message: 'Refresh token is required' });
     }
@@ -88,14 +88,15 @@ export const refreshToken = async (req, res) => {
     }
 
     try {
-        const decoded = jwt.verify(refreshToken, process.env.REFRESH_COOKIE_EXPIRATION);
-        const user = { id: decoded.id };
-
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
+         req.userId = decoded.id;
+          const user = await User.findById(req.userId);
+        console.log(user);
         const newAccessToken = generateAccessToken(user);
-
-        res.cookie('token', newAccessToken, { httpOnly: true, maxAge: 15 * 60 * 1000, sameSite: 'strict' });
-
-        res.json({ message: 'Token refreshed successfully' });
+        console.log("new access token",newAccessToken);
+        res.cookie('token', newAccessToken, { httpOnly: true, maxAge: 5 * 60 * 1000, sameSite: 'strict',secure:false });
+        
+        res.json({ message: 'Token refreshed successfully',user });
     } catch (err) {
         res.status(401).json({ message: 'Invalid or expired refresh token' });
     }

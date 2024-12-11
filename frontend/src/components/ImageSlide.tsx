@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import ImageCard from "./ImageCard";
 
 interface ImageCard {
-  id: string;
   img: string;
 }
 interface Props {
@@ -45,9 +44,7 @@ const ImageSlide = ({ images }: Props) => {
         </h2>
         <Slider {...settings}>
           {images?.length !== 0 &&
-            images?.map((image) => (
-              <ImageCard url={image.img} key={image.id} />
-            ))}
+            images?.map((image) => <ImageCard url={image.img} />)}
         </Slider>
       </div>
     </div>

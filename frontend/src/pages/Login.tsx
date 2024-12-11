@@ -2,6 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apiClient from "../utils/apiClient";
 import { useAuth } from "../utils/AuthContext";
+import CustomAlert from "../components/CustomeAler";
 // Interface for form data
 interface FormData {
   username: string;
@@ -16,7 +17,17 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [error, setIsError] = useState<boolean>(false);
 
+  const showAlert = (message: string, isError: boolean) => {
+    setAlertMessage(message);
+    setIsError(isError);
+    setAlertVisible(true);
+
+    setTimeout(() => setAlertVisible(false), 3000);
+  };
   // Handle input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,16 +41,26 @@ const Login = () => {
       const res = await apiClient.post("/auth/login", formData, {
         withCredentials: true,
       });
+      showAlert("Logged in successfully", false);
       login();
-      alert("Login successful");
       localStorage.setItem("currentUser", JSON.stringify(res.data["user"]));
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     } catch (err: any) {
-      alert(err.response?.data?.message || "Error logging in");
+      showAlert(err.response?.data?.message || "Error logging in", true);
     }
   };
+
   return (
     <div className="font-[sans-serif]">
+      {alertVisible && (
+        <CustomAlert
+          message={alertMessage}
+          isError={error}
+          // onClose={() => setAlertVisible(false)}
+        />
+      )}
       <div className="min-h-screen flex fle-col items-center justify-center py-6 px-4">
         <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full">
           <div className="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">

@@ -82,7 +82,7 @@ const Profile = () => {
       <h2>Email: {profile.email}</h2>
 
       <img
-        src={profile.img || "/default-avatar.png"}
+        src={profile.img || "../../public/img/noavatar.jpg"}
         alt="Profile"
         style={{
           height: 50,
@@ -101,14 +101,22 @@ const Profile = () => {
           <input
             type="text"
             name="username"
-            value={updatedProfile.username || profile.username}
+            value={
+              updatedProfile.username !== undefined
+                ? updatedProfile.username
+                : profile.username || ""
+            }
             onChange={handleChange}
             placeholder="Username"
           />
           <input
             type="email"
             name="email"
-            value={updatedProfile.email || profile.email}
+            value={
+              updatedProfile.email !== undefined
+                ? updatedProfile.email
+                : profile.email || ""
+            }
             onChange={handleChange}
             placeholder="Email"
           />

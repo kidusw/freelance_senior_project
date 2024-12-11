@@ -10,16 +10,16 @@ const Featured = () => {
   console.log(searchInput);
   return (
     <div className="flex justify-center items-center my-4 h-[600px] p-5 bg-green-950 text-white lg">
-      <div className="flex items-center lg:w-[90%]">
+      <div className="flex items-center justify-between lg:w-[90%]">
         <div className="flex flex-col gap-8">
           <h1 className="text-3xl lg:text-5xl">
             Find the perfect <i className="font-light">freelance</i> services in{" "}
             <b className="font-black">Ethiopia</b>
           </h1>
           <div className="flex items-center justify-between bg-white rounded-md">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ">
               <img
-                className="w-[20px] h-[20px] m-[10px]"
+                className="w-[20px] h-[20px] m-[10px] "
                 src="/img/search.png"
                 alt=""
               />
@@ -54,7 +54,11 @@ const Featured = () => {
           </div>
         </div>
         <div className="hidden lg:block">
-          <img src="/img/man2.jpg" alt="" />
+          <img
+            src="/img/man2.jpg"
+            alt=""
+            className="border-1 border-green-500 m-10 rounded-full"
+          />
         </div>
       </div>
     </div>

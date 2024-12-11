@@ -7,8 +7,8 @@ import { createReview,getReviews,deleteReview } from "../controller/review.contr
 const router=express.Router();
 
 router.post("/",verifyToken,createReview);
-router.get("/:gigId",getReviews);
-router.get("/:id",deleteReview);
+router.get("/:gigId",verifyToken,getReviews);
+// router.get("/:id",verifyToken,deleteReview);
 
 
 export default router;

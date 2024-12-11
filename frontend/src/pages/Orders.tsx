@@ -99,13 +99,20 @@ const Orders = () => {
               <th>Price</th>
               <th>Contact</th>
             </tr>
-            {data?.map((order: any) => (
+            {data?.map((order: Order) => (
               <tr key={order._id}>
                 <td>
                   <img className="image" src={order.img} alt="" />
                 </td>
                 <td>{order.title}</td>
                 <td>{order.price}</td>
+                <td>
+                  {order.payment_intent == "temporary" ? (
+                    <Link to={`/payment/${order._id}`}>Make payment</Link>
+                  ) : (
+                    <></>
+                  )}
+                </td>
                 <td>
                   <img
                     className="message"
