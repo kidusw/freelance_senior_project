@@ -28,6 +28,7 @@ import Payment from "./pages/Payment";
 import Admin from "./pages/Admin";
 import AdminUser from "./pages/AdminUser";
 import AdminSeller from "./pages/AdminSeller";
+import SingleGig from "./pages/SingleGig";
 
 const App = () => {
   useAutoRefresh();
@@ -94,6 +95,10 @@ const App = () => {
               element: <AdminSeller />,
             },
           ],
+        },
+        {
+          path: "singlegig/:id",
+          element: <SingleGig />,
         },
       ],
     },

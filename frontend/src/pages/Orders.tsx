@@ -106,8 +106,10 @@ const Orders = () => {
                 </td>
                 <td>{order.title}</td>
                 <td>{order.price}</td>
+                <td>{order.isCompleted}</td>
                 <td>
-                  {order.payment_intent == "temporary" ? (
+                  {order.payment_intent == "temporary" &&
+                  order.buyerId == currentUser?._id ? (
                     <Link to={`/payment/${order._id}`}>Make payment</Link>
                   ) : (
                     <></>

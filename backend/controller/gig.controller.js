@@ -30,9 +30,9 @@ export const editGig = async(req,res,next)=>{
         const updatedGig=await Gig.findOneAndUpdate({_id:gigId},
             {$set:updatedData},
             {new:true});
-       
+       res.status(200).send("gig updated succssesfully!");
     } catch (error) {
-        
+            next(error);   
     }
 }
 
