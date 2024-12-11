@@ -25,6 +25,9 @@ import Add from "./pages/AddGig";
 import useAutoRefresh from "./utils/useAutoRefresh";
 import MyGigs from "./pages/MyGigs";
 import Payment from "./pages/Payment";
+import Admin from "./pages/Admin";
+import AdminUser from "./pages/AdminUser";
+import AdminSeller from "./pages/AdminSeller";
 
 const App = () => {
   useAutoRefresh();
@@ -77,6 +80,20 @@ const App = () => {
         {
           path: "/gig/:id",
           element: <Gig />,
+        },
+        {
+          path: "/admin",
+          element: <Admin />,
+          children: [
+            {
+              path: "/admin/users",
+              element: <AdminUser />,
+            },
+            {
+              path: "/admin/sellers",
+              element: <AdminSeller />,
+            },
+          ],
         },
       ],
     },
