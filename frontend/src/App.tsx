@@ -22,6 +22,9 @@ import Message from "./pages/Message";
 import Messages from "./pages/Messages";
 import Orders from "./pages/Orders";
 import Add from "./pages/AddGig";
+import Admin from "./pages/Admin";
+import AdminUser from "./pages/AdminUser";
+import AdminSeller from "./pages/AdminSeller";
 
 const App = () => {
   const Layout = () => {
@@ -71,16 +74,31 @@ const App = () => {
           path: "/gig/:id",
           element: <Gig />,
         },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
       ],
     },
     {
-      path: "/register",
-      element: <Register />,
+      path: "/admin",
+      element: <Admin />,
+      children: [
+        {
+          path: "/admin/users",
+          element: <AdminUser />
+        },
+        {
+          path: "/admin/sellers",
+          element: <AdminSeller />
+        }
+      ]
     },
-    {
-      path: "/login",
-      element: <Login />,
-    },
+
     {
       path: "*", // Catch-all route for unmatched paths
       element: <NotFound />,
