@@ -5,7 +5,7 @@ import { GiGamepadCross } from "react-icons/gi";
 import { Link, Outlet } from "react-router-dom";
 const Admin = () => {
   return (
-    <div className="grid grid-cols-[250px_1fr] h-screen">
+    <div className="grid grid-cols-[250px_1fr] h-screen mt-24 mb-4">
       <div className="left flex flex-col items-center pt-1 gap-4 bg-slate-300 overflow-y-scroll py-10">
         <h3 className="text-2xl">Dashboard</h3>
         <Link

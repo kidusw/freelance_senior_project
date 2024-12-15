@@ -65,10 +65,11 @@ export const makePayment =async(req,res,next)=>{
     try {
         const or= await Order.findOneAndUpdate({_id:order_id},
             {$set:
-                {isCompleted:true,payment_intent:"completed",sales:sales+1},
+                {isCompleted:true,payment_intent:"completed"},
             }
             ,{new:true});
-        console.log(or);
+        const updateSales=await Gig.findOneAndUpdate({_id:or.gigId},{$inc:{sales:1}},{new:true});
+
         res.status(200).send(or);
     } catch (error) {
         next(error);  

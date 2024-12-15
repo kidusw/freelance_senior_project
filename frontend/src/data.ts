@@ -11,28 +11,28 @@ export const cards = [
     title: "Logo Design",
     desc: "Build yor brand",
     img: "https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      keyword:"web"
+      keyword:"logo"
   },
   {
     id: 3,
     title: "WordPress",
     desc: "Customize your site",
     img: "https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      keyword:"design"
-  },
-  {
-    id: 4,
-    title: "Voice Over",
-    desc: "Share your message",
-    img: "https://images.pexels.com/photos/7608079/pexels-photo-7608079.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
       keyword:"web"
   },
   {
+    id: 4,
+    title: "Mobile Application",
+    desc: "Reach your Audience",
+    img: "https://images.unsplash.com/photo-1533022139390-e31c488d69e2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1vYmlsZXxlbnwwfHwwfHx8MA%3D%3D",
+      keyword:"mobile"
+  },
+  {
     id: 5,
-    title: "Video Explainer",
+    title: "Video Editing",
     desc: "Engage your audience",
     img: "https://images.pexels.com/photos/13388047/pexels-photo-13388047.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      keyword:"AI"
+      keyword:"Video"
   },
   {
     id: 6,
@@ -46,14 +46,14 @@ export const cards = [
     title: "SEO",
     desc: "Unlock growth online",
     img: "https://images.pexels.com/photos/4820241/pexels-photo-4820241.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      keyword:"logo"
+      keyword:"seo"
   },
   {
     id: 8,
-    title: "Illustration",
+    title: "Photo editing",
     desc: "Color you dreams",
     img: "https://images.pexels.com/photos/15032623/pexels-photo-15032623.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
-      keyword:"logo"
+      keyword:"photo"
   },
 ];
 

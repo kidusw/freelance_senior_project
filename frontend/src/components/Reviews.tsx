@@ -1,10 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import newRequest from "../utils/apiClient";
 import Review from "./Review";
 
 interface ReviewsProps {
   gigId: string;
+}
+
+interface User {
+  _id: string;
+  username: string;
+  isSeller: true;
 }
 
 interface ReviewData {
@@ -16,6 +22,7 @@ interface ReviewData {
 }
 
 const Reviews: React.FC<ReviewsProps> = ({ gigId }) => {
+  const [currentUser, setUser] = useState<User | null>(null);
   const queryClient = useQueryClient();
 
   // Fetch reviews
@@ -43,6 +50,14 @@ const Reviews: React.FC<ReviewsProps> = ({ gigId }) => {
     form.reset();
   };
 
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }, []);
+
+  console.log("current user from reviews:", currentUser);
   return (
     <div className="reviews mt-12">
       <h2 className="text-2xl">Reviews</h2>
@@ -51,20 +66,23 @@ const Reviews: React.FC<ReviewsProps> = ({ gigId }) => {
         : error
         ? "Something went wrong!"
         : data?.map((review) => <Review key={review._id} review={review} />)}
-      <div className="add">
-        <h3>Add a review</h3>
-        <form className="addForm" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Write your opinion" required />
-          <select name="star" id="star" required>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-          <button type="submit">Send</button>
-        </form>
-      </div>
+      {!currentUser?.isSeller && (
+        <div className="add">
+          <h3>Add a review</h3>
+          <form className="addForm" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Write your opinion" required />
+            <select name="star" id="star" required>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

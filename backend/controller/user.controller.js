@@ -14,10 +14,14 @@ export const deleteUser=async(req,res,next)=>{
 }
 
 export const getUser=async(req,res,next)=>{
-    const user=await User.findById(req.params.id)
-        
+  try {
+        const user=await User.findById(req.params.id)
+    console.log("user: ",user);
         res.status(200).send(user)
-      
+  } catch (error) {
+    next(error);
+  }
+  
 }
 
 export const editUser=async(req,res)=>{

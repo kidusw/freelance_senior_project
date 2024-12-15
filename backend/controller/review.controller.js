@@ -18,9 +18,6 @@ export const createReview=async(req,res,next)=>{
        if(review) return next(createError(403,"You have already created a review"));
         await Gig.findByIdAndUpdate(req.body.gigId,{$inc:{totalStars:req.body.star,starNumber:1}})
         const savedReview=await newReview.save();
-      
-
-
         res.status(201).send(savedReview);
 
     } catch (error) {

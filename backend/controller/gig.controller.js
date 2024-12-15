@@ -73,3 +73,13 @@ export const getGigs=async(req,res,next)=>{
         next(error);
     }
 }
+
+export const topRated=async(req,res,next)=>{
+    try {
+        const topGigs=await Gig.find({starNumber:{$gt:3}});
+        // console.log("topgigs: ",topGigs);
+        res.status(200).send(topGigs);
+    } catch (error) {
+        next(error);
+    }
+}

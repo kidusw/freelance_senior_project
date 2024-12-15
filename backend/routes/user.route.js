@@ -8,7 +8,7 @@ const router=express.Router();
 
 router.delete("/delete/:id",verifyToken,deleteUser);
 router.put("/edit",verifyToken,editUser);
-router.get("/:id",getUser);
+router.get("/:id",verifyToken,getUser);
 
 
 export default router;

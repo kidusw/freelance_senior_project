@@ -1,13 +1,17 @@
 import createError from "../utils/createError.js";
 import Conversation from "../models/conversationmodel.js";
 
+
 export const createConversation = async (req, res, next) => {
+  const user=req.userData;
+  console.log("seller:",user.isSeller);
+  console.log("id:",user._id);
   const newConversation = new Conversation({
-    id: req.isSeller ? req.userId + req.body.to : req.body.to + req.userId,
-    sellerId: req.isSeller ? req.userId : req.body.to,
-    buyerId: req.isSeller ? req.body.to : req.userId,
-    readBySeller: req.isSeller,
-    readByBuyer: !req.isSeller,
+    id: user.isSeller ? user._id+ req.body.to : req.body.to + req.userId,
+    sellerId: user.isSeller ? user._id : req.body.to,
+    buyerId: user._id ? req.body.to : user._id,
+    readBySeller: user.isSeller,
+    readByBuyer: !user.isSeller,
   });
 
   try {

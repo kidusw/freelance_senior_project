@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BsToggleOff } from "react-icons/bs";
 import { BsToggle2On } from "react-icons/bs";
+import imageCompression from "browser-image-compression";
+
 const Register = () => {
   const [file, setFile] = useState(null);
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -39,18 +41,29 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    const url = await upload(file);
+
+    const compressionOptions = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
     try {
+      const compressedFile = file
+        ? await imageCompression(file, compressionOptions)
+        : null;
+      const url = await upload(compressedFile);
       await apiClient.post("/auth/register", {
         ...user,
         img: url,
       });
-      navigate("/login");
+      setInterval(() => {
+        navigate("/login");
+      }, 3000);
     } catch (err: any) {
       console.log(err.response.data.message);
       if (err.response.data.message) {
         setLoading(false);
-        alert(err.response.data.message);
       }
     }
   };

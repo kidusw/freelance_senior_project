@@ -4,7 +4,6 @@ import { blacklistToken } from "../middleware/jwt.js";
 import User from "../models/usermodel.js";
 
 
-
 const refreshTokens = new Set();
 const ACCESS_TOKEN_EXPIRATION = '5m'; // Short-lived access token
 const REFRESH_TOKEN_EXPIRATION = '7d'; // Long-lived refresh token
@@ -40,7 +39,7 @@ export const register=async(req,res)=>{
         const newUser = new User({ ...req.body, password: hashedPassword });
         await newUser.save();
 
-        res.json({ message: 'User registered successfully' });
+        res.json({ message: 'User registered successfully' ,newUser});
     } catch (err) {
         res.status(500).json({ message: 'Server error', error: err.message });
     }

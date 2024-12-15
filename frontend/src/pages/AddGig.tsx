@@ -3,6 +3,7 @@ import upload from "../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../utils/apiClient";
 import { useNavigate } from "react-router-dom";
+import imageCompression from "browser-image-compression";
 
 const Add = () => {
   const [singleFile, setSingleFile] = useState<File | null>(null);
@@ -83,8 +84,27 @@ const Add = () => {
   const handleUpload = async () => {
     setUploading(true);
     try {
-      const cover = singleFile ? await upload(singleFile) : "";
-      const images = await Promise.all(files.map((file) => upload(file)));
+      const compressionOptions = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+
+      const compressedCover = singleFile
+        ? await imageCompression(singleFile, compressionOptions)
+        : null;
+
+      const cover = compressedCover ? await upload(compressedCover) : "";
+
+      const compressedFiles = await Promise.all(
+        files.map((file) => imageCompression(file, compressionOptions))
+      );
+
+      const images = await Promise.all(
+        compressedFiles.map((file) => upload(file))
+      );
+
+      // Update the gig data state
       setGigData((prev) => ({
         ...prev,
         cover,
@@ -148,6 +168,10 @@ const Add = () => {
               <option value="web">Web Development</option>
               <option value="animation">Animation</option>
               <option value="music">Music</option>
+              <option value="mobile application">Mobile Application</option>
+              <option value="photo editing">Photo editing</option>
+              <option value="video editing">video editing</option>
+              <option value="seo">SEO</option>
             </select>
 
             <div className="images">
@@ -273,7 +297,13 @@ const Add = () => {
               min="1"
               required
             />
-            <button type="submit">Create</button>
+            {uploading ? (
+              <button disabled type="submit">
+                Create
+              </button>
+            ) : (
+              <button type="submit">Create</button>
+            )}
           </div>
         </form>
       </div>

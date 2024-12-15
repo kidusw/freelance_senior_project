@@ -3,6 +3,7 @@ import GigCard from "../components/GigCard";
 import apiClient from "../utils/apiClient";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
+import { gigs } from "../data";
 
 interface GigData {
   _id: string;
@@ -24,7 +25,7 @@ const Gigs = () => {
   const [open, setOpen] = useState(false);
   const minRef = useRef<HTMLInputElement>(null);
   const maxRef = useRef<HTMLInputElement>(null);
-
+  const [gigs, setGigs] = useState<GigData[] | null>(null);
   const { search } = useLocation();
 
   const fetchGigs = () => {
@@ -35,11 +36,19 @@ const Gigs = () => {
       .then((res) => res.data);
   };
 
-  const { isLoading, isError, data, error, refetch } = useQuery<GigData[]>({
+  const { isLoading, isError, data, error, refetch } = useQuery<
+    GigData[] | null
+  >({
     queryKey: ["gigs", sort, search],
     queryFn: fetchGigs,
   });
   console.log(data);
+  useEffect(() => {
+    if (data) {
+      setGigs(data);
+    }
+  }, []);
+
   const reSort = (type: string) => {
     setSort(type);
     setOpen(false);
@@ -54,17 +63,15 @@ const Gigs = () => {
       refetch();
     }
   }, [sort]);
-
+  console.log(error?.message.endsWith("403") && "You must be logged in!");
   return (
     <div className="my-10 gigs flex justify-center lg:mt-32">
       <div className="container lg:w-[90%] py-7 px-0 flex flex-col gap-4">
         <span className="breadcrumbs text-xs text-gray-500">
-          Liverr Graphics & Design
+          {/* {gigs && gigs[0].title} */}
         </span>
-        <h1 className="text-3xl">AI Artists</h1>
-        <p className="text-gray-600 font-medium">
-          Explore the boundaries of art and technology with Liverr's AI artists.
-        </p>
+        {/* <h1 className="text-3xl">{gigs && gigs[0].title}</h1> */}
+        <p className="text-gray-600 font-medium">Explore the categories</p>
         <div className="menu flex items-center justify-between flex-wrap">
           <div className="left flex items-center flex-wrap gap-3 text-gray-500 font-medium">
             <span>Budget</span>
@@ -127,7 +134,7 @@ const Gigs = () => {
           {isLoading
             ? "Loading..."
             : isError
-            ? `Error: ${error.message || "Something went wrong"}`
+            ? `${error?.message.endsWith("403") && "You must be logged in!"}`
             : data?.map((gig: GigData) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>

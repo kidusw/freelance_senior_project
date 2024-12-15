@@ -66,7 +66,7 @@ const Payment = () => {
         paid_amount: amount,
       });
       showAlert("Payment succssesful", false);
-      console.log(response.data);
+      console.log("payment data:", response.data);
     } catch (error: any) {
       showAlert("Payment unsuccessful", true);
       console.log(error.response?.data);
