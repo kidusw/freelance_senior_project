@@ -57,7 +57,7 @@ const Featured = () => {
           <img
             src="/img/man2.jpg"
             alt=""
-            className="border-1 border-green-500 m-10 rounded-full"
+            className="border-1 border-green-500 m-10 rounded-md"
           />
         </div>
       </div>
