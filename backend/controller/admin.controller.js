@@ -28,7 +28,6 @@ const login = async (req, res) => {
     const accessToken = jwt.sign(
       { id: user._id, username: user.username, isAdmin: user.isAdmin },
       process.env.SECRET_KEY,
-      { expiresIn: "5m" } // Short-lived token
     );
 
     // Send the token in an httpOnly cookie
@@ -62,9 +61,9 @@ const getStatus = async (req, res) => {
   }
 };
 
-const users = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({isSeller: false});
     res.status(200).send(users);
   } catch (err) {
     res.status(500).send("Internal Server Error");
@@ -78,4 +77,13 @@ const deleteUser = async(req, res) => {
         message: `${user.username} is deleted`,
     });
 }
-export { getStatus, login, users, deleteUser };
+
+const getSellers = async (req, res) => {
+  try {
+    const users = await User.find({isSeller: true});
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(500).send("Internal Server Error");
+  }
+}
+export { getStatus, login, getUsers, getSellers,  deleteUser };
