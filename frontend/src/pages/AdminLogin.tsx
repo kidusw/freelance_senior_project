@@ -29,7 +29,11 @@ const AdminLogin = () => {
   };
   return (
     <div className="font-[sans-serif]">
-      <div className="bg-red-400 text-xl text-center">{error}</div>
+      {error !== "" && (
+        <div className="bg-red-300 text-xl text-center py-4 text-gray-700">
+          {error}
+        </div>
+      )}
       <div className="min-h-screen flex fle-col items-center justify-center py-6 px-4">
         <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full">
           <div className="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">
@@ -39,8 +43,8 @@ const AdminLogin = () => {
                   Sign in
                 </h3>
                 <p className="text-gray-500 text-sm mt-4 leading-relaxed">
-                  Sign in to your account and explore a world of possibilities.
-                  Your journey begins here.
+                  Sign in to your admin account and take control. Manage,
+                  monitor, and unlock new possibilities today.
                 </p>
               </div>
 

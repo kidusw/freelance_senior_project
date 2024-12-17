@@ -57,19 +57,20 @@ const App = () => {
         { path: "/myGigs", element: <MyGigs /> },
         { path: "/gigs", element: <Gigs /> },
         { path: "/gig/:id", element: <Gig /> },
-        {
-          path: "/admin/*",
-          element: (
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          ),
-          children: [
-            { path: "users", element: <AdminUser /> }, // Resolves to `/admin/users`
-            { path: "sellers", element: <AdminSeller /> }, // Resolves to `/admin/sellers`
-          ],
-        },
+       
         { path: "/singlegig/:id", element: <SingleGig /> },
+      ],
+    },
+    {
+      path: "/admin/*",
+      element: (
+        <ProtectedRoute>
+          <Admin />
+        </ProtectedRoute>
+      ),
+      children: [
+        { path: "users", element: <AdminUser /> }, // Resolves to `/admin/users`
+        { path: "sellers", element: <AdminSeller /> }, // Resolves to `/admin/sellers`
       ],
     },
     { path: "/register", element: <Register /> },
