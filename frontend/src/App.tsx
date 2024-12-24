@@ -28,6 +28,7 @@ import Payment from "./pages/Payment";
 import Admin from "./pages/Admin";
 import AdminUser from "./pages/AdminUser";
 import AdminSeller from "./pages/AdminSeller";
+import AdminCategories from "./pages/AdminCategories";
 import SingleGig from "./pages/SingleGig";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLogin from "./pages/AdminLogin";
@@ -57,7 +58,7 @@ const App = () => {
         { path: "/myGigs", element: <MyGigs /> },
         { path: "/gigs", element: <Gigs /> },
         { path: "/gig/:id", element: <Gig /> },
-       
+
         { path: "/singlegig/:id", element: <SingleGig /> },
       ],
     },
@@ -70,14 +71,15 @@ const App = () => {
       ),
       children: [
         { path: "users", element: <AdminUser /> }, // Resolves to `/admin/users`
-        { path: "sellers", element: <AdminSeller /> }, // Resolves to `/admin/sellers`
+        { path: "sellers", element: <AdminSeller /> },
+        { path: "categories", element: <AdminCategories /> },
       ],
     },
     { path: "/register", element: <Register /> },
     { path: "/login", element: <Login /> },
     { path: "/payment/:id", element: <Payment /> },
     { path: "*", element: <NotFound /> }, // Catch-all route
-    {path: "/admin/login", element: <AdminLogin />}
+    { path: "/admin/login", element: <AdminLogin /> },
   ]);
 
   return <RouterProvider router={router} />;

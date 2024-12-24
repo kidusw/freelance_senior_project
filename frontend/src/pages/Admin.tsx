@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 interface StatData {
   users: number;
   sellers: number;
-  gigs: number;
+  categories: number;
 }
 const Admin = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Admin = () => {
           setStatData({
             users: response.data.values.users,
             sellers: response.data.values.sellers,
-            gigs: response.data.values.gigs,
+            categories: response.data.values.categories,
           });
           console.log(statData);
           setLoading(false);
@@ -63,7 +63,7 @@ const Admin = () => {
         </Link>
         <Link
           className="bg-blue-600 hover:bg-blue-500 w-full text-center p-3 text-white rounded-lg"
-          to="/"
+          to="/admin/categories"
         >
           Categories
         </Link>
@@ -112,7 +112,9 @@ const Admin = () => {
                 <MdCategory size={50} fill="white" />
                 <span className="font-bold">Categories</span>
               </div>
-              <h3 className="noOfUsers text-3xl font-light">11</h3>
+              <h3 className="noOfUsers text-3xl font-light">
+                {statData?.categories}
+              </h3>
             </div>
           </div>
         )}

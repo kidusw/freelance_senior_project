@@ -2,9 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/usermodel.js";
 import Gig from "../models/gigmodel.js";
+import Category from "../models/category.model.js";
 
 const login = async (req, res) => {
-  console.log(req.body);
   const { username, password } = req.body;
 
   try {
@@ -27,7 +27,7 @@ const login = async (req, res) => {
     // Generate a short-lived access token
     const accessToken = jwt.sign(
       { id: user._id, username: user.username, isAdmin: user.isAdmin },
-      process.env.SECRET_KEY,
+      process.env.SECRET_KEY
     );
 
     // Send the token in an httpOnly cookie
@@ -40,20 +40,18 @@ const login = async (req, res) => {
 };
 const getStatus = async (req, res) => {
   try {
-    console.log(req.user);
     const users = await User.find().countDocuments();
     const sellers = await User.find({ isSeller: true }).countDocuments();
-    const gigs = await Gig.countDocuments();
+    const categories = await Category.countDocuments();
     res.send({
       status: "success",
       values: {
         users,
         sellers,
-        gigs,
+        categories,
       },
     });
   } catch (err) {
-    // console.log(err);
     res.status(500).send({
       status: "Fail",
       error: "Server Error",
@@ -63,27 +61,58 @@ const getStatus = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({isSeller: false});
+    const users = await User.find({ isSeller: false });
     res.status(200).send(users);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
 };
 
-const deleteUser = async(req, res) => {
-    console.log(req.params.id);
-    const user = await User.findByIdAndDelete(req.params.id);
-    res.status(200).send({
-        message: `${user.username} is deleted`,
-    });
-}
+const deleteUser = async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+  res.status(200).send({
+    message: `${user.username} is deleted`,
+  });
+};
 
 const getSellers = async (req, res) => {
   try {
-    const users = await User.find({isSeller: true});
+    const users = await User.find({ isSeller: true });
     res.status(200).send(users);
   } catch (err) {
     res.status(500).send("Internal Server Error");
   }
-}
-export { getStatus, login, getUsers, getSellers,  deleteUser };
+};
+
+const getCategories = async (req, res) => {
+  try {
+    const categories = await Category.find().select("name -_id");
+
+    res.status(200).send(categories);
+  } catch (err) {
+    res.status(500).send("Internal Server Error");
+  }
+};
+const addCategory = async (req, res) => {
+  const category = new Category({
+    name: req.body.category,
+  });
+  await category.save();
+  res.status(201).send(category);
+};
+const deleteCategory = async (req, res) => {
+  const category = await Category.findOneAndDelete({ name: req.body.name });
+  res.status(200).send({
+    message: `${category} is deleted`,
+  });
+};
+export {
+  getStatus,
+  login,
+  getUsers,
+  getSellers,
+  deleteUser,
+  getCategories,
+  deleteCategory,
+  addCategory,
+};

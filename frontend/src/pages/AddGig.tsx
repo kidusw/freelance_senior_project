@@ -1,15 +1,30 @@
-import React, { useState, FormEventHandler } from "react";
+import React, { useState, FormEventHandler, useEffect } from "react";
 import upload from "../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import apiClient from "../utils/apiClient";
 import { useNavigate } from "react-router-dom";
 import imageCompression from "browser-image-compression";
-
+interface Category {
+  name: string;
+}
 const Add = () => {
+  const [categories, setCategories] = useState<Category[]>();
   const [singleFile, setSingleFile] = useState<File | null>(null);
   const [featureInput, setFeatureInput] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    apiClient
+      .get("/admin/categories")
+      .then((res) => {
+        console.log(res.data);
+        setCategories(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // State to manage gig data
   const [gigData, setGigData] = useState({
@@ -164,6 +179,11 @@ const Add = () => {
               required
             >
               <option value="">Select Category</option>
+              {categories?.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
               <option value="design">Design</option>
               <option value="web">Web Development</option>
               <option value="animation">Animation</option>
