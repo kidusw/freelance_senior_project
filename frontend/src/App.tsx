@@ -32,6 +32,7 @@ import AdminCategories from "./pages/AdminCategories";
 import SingleGig from "./pages/SingleGig";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLogin from "./pages/AdminLogin";
+import Success from "./pages/Success";
 
 const App = () => {
   useAutoRefresh();
@@ -49,17 +50,64 @@ const App = () => {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <Home /> },
-        { path: "/profile", element: <Profile /> },
-        { path: "/orders", element: <Orders /> },
-        { path: "/add", element: <Add /> },
-        { path: "/messages", element: <Messages /> },
-        { path: "/message/:id", element: <Message /> },
-        { path: "/myGigs", element: <MyGigs /> },
-        { path: "/gigs", element: <Gigs /> },
-        { path: "/gig/:id", element: <Gig /> },
-
-        { path: "/singlegig/:id", element: <SingleGig /> },
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/orders",
+          element: <Orders />,
+        },
+        {
+          path: "/add",
+          element: <Add />,
+        },
+        {
+          path: "/messages",
+          element: <Messages />,
+        },
+        {
+          path: "/message/:id",
+          element: <Message />,
+        },
+        {
+          path: "/myGigs",
+          element: <MyGigs />,
+        },
+        {
+          path: "/gigs",
+          element: <Gigs />,
+        },
+        {
+          path: "/gig/:id",
+          element: <Gig />,
+        },
+        {
+          path: "/admin",
+          element: <Admin />,
+          children: [
+            {
+              path: "/admin/users",
+              element: <AdminUser />,
+            },
+            {
+              path: "/admin/sellers",
+              element: <AdminSeller />,
+            },
+          ],
+        },
+        {
+          path: "singlegig/:id",
+          element: <SingleGig />,
+        },
+        {
+          path: "/success",
+          element: <Success />,
+        },
       ],
     },
     {

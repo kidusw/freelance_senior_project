@@ -81,6 +81,7 @@ const Gigs = () => {
               type="number"
               placeholder="min"
               defaultValue={0}
+              min={0}
             />
             <input
               className="p-1 border border-gray-300 outline-none placeholder:text-gray-500"
@@ -88,6 +89,7 @@ const Gigs = () => {
               type="number"
               placeholder="max"
               defaultValue={10000}
+              max={10000}
             />
             <button
               className="bg-green-600 text-white font-medium border-none cursor-pointer py-1 px-2 rounded-md"
