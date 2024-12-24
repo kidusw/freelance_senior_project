@@ -29,6 +29,7 @@ import Admin from "./pages/Admin";
 import AdminUser from "./pages/AdminUser";
 import AdminSeller from "./pages/AdminSeller";
 import SingleGig from "./pages/SingleGig";
+import Success from "./pages/Success";
 
 const App = () => {
   useAutoRefresh();
@@ -99,6 +100,10 @@ const App = () => {
         {
           path: "singlegig/:id",
           element: <SingleGig />,
+        },
+        {
+          path: "/success",
+          element: <Success />,
         },
       ],
     },

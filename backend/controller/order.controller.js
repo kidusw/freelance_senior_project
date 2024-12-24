@@ -68,7 +68,10 @@ export const makePayment =async(req,res,next)=>{
                 {isCompleted:true,payment_intent:"completed"},
             }
             ,{new:true});
-        const updateSales=await Gig.findOneAndUpdate({_id:or.gigId},{$inc:{sales:1}},{new:true});
+       const updateSales=await Gig.findOneAndUpdate({_id:or.gigId},{$inc:{sales:1}},{new:true});
+        const deltedOrder=await Order.findOneAndDelete({_id:order_id})
+        console.log(deltedOrder);
+      
 
         res.status(200).send(or);
     } catch (error) {

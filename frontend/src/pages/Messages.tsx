@@ -32,7 +32,8 @@ export interface Conversation {
 
 const Messages = () => {
   const [currentUser, setUser] = useState<User | null>(null);
-
+  const [userImg, setImg] = useState<string | undefined>("");
+  const [userId, setUserId] = useState<string | undefined>("");
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -57,7 +58,26 @@ const Messages = () => {
   const handleRead = (id: string) => {
     mutation.mutate(id);
   };
-
+  const handleId = (userId: string) => {
+    setUserId(userId);
+  };
+  useEffect(() => {
+    try {
+      const setImage = async () => {
+        const id = userId;
+        const response = await apiClient.get<User>(`/users/${id}`);
+        console.log("user data:", response.data.img);
+        if (response) {
+          const img = response.data.img;
+          setImg(img);
+        }
+      };
+      setImage();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [userId]);
+  console.log("user id", userId);
   return (
     <div className="myGigs flex justify-center mt-20">
       {isLoading ? (
@@ -83,7 +103,18 @@ const Messages = () => {
             <tbody className="space-x-3">
               {data?.map((c) => (
                 <tr className="even:bg-blue-50" key={c.id}>
-                  <td>{currentUser?.isSeller ? c.buyerId : c.sellerId}</td>
+                  <td>
+                    <img
+                      src={userImg || "../../public/img/noavatar.jpg"}
+                      style={{ height: 40, width: 40 }}
+                      onLoadStart={() =>
+                        currentUser?.isSeller
+                          ? handleId(c.buyerId)
+                          : handleId(c.sellerId)
+                      }
+                      alt="seller img"
+                    />
+                  </td>
                   <td>
                     <Link className="max-w-[360px]" to={`/message/${c.id}`}>
                       {c?.lastMessage?.substring(0, 100) || "No message"}...
