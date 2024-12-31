@@ -82,50 +82,92 @@ const Orders = () => {
     }
   };
   return (
-    <div className="orders">
+    <div className="orders mt-32 mb-24 min-h-[300px] lg:max-w-[90%] mx-auto">
       {isLoading ? (
-        "loading"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-10 animate-[spin_0.8s_linear_infinite] fill-blue-600 block mx-auto"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
+            data-original="#000000"
+          />
+        </svg>
       ) : error ? (
-        "error"
+        <h1 className="text-center text-3xl text-red-500">
+          Error fetching data
+        </h1>
       ) : (
         <div className="container">
           <div className="title">
-            <h1>Orders</h1>
+            <h1 className="text-4xl mb-4">Orders</h1>
           </div>
-          <table>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Contact</th>
-            </tr>
-            {data?.map((order: Order) => (
-              <tr key={order._id}>
-                <td>
-                  <img className="image" src={order.img} alt="" />
-                </td>
-                <td>{order.title}</td>
-                <td>{order.price}</td>
-                <td>{order.isCompleted}</td>
-                <td>
-                  {order.payment_intent == "temporary" &&
-                  order.buyerId == currentUser?._id ? (
-                    <Link to={`/payment/${order._id}`}>Make payment</Link>
-                  ) : (
-                    <></>
-                  )}
-                </td>
-                <td>
-                  <img
-                    className="message"
-                    src="./img/message.png"
-                    alt=""
-                    onClick={() => handleContact(order)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </table>
+          {data?.length === 0 ? (
+            <h1 className="text-center text-3xl text-red-500">No orders</h1>
+          ) : (
+            <div className="font-[sans-serif] overflow-x-auto">
+              <table className="min-w-full bg-white">
+                <thead className="bg-gray-800 whitespace-nowrap">
+                  <tr>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Image
+                    </th>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Title
+                    </th>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Price
+                    </th>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Payment Status
+                    </th>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Make Payment
+                    </th>
+                    <th className="p-4 text-left text-sm font-medium text-white">
+                      Contact
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="whitespace-nowrap">
+                  {data?.map((order: Order) => (
+                    <tr key={order._id} className="even:bg-blue-50">
+                      <td className="p-4 text-sm text-black">
+                        <img className="image w-32" src={order.img} alt="" />
+                      </td>
+                      <td className="p-4 text-xl text-black">{order.title}</td>
+                      <td className="p-4 text-sm text-black">{order.price} Birr.</td>
+                      <td className="p-4 text-sm text-black">
+                        {order.isCompleted}
+                      </td>
+                      <td className="p-4 text-sm text-black">
+                        {order.payment_intent == "temporary" &&
+                        order.buyerId == currentUser?._id ? (
+                          <Link
+                            className="p-3 bg-blue-500 hover:bg-blue-700 rounded-md text-white"
+                            to={`/payment/${order._id}`}
+                          >
+                            Pay with Chapa
+                          </Link>
+                        ) : (
+                          <></>
+                        )}
+                      </td>
+                      <td className="p-4 text-sm text-black">
+                        <img
+                          className="message w-6 cursor-pointer"
+                          src="./img/message.png"
+                          alt=""
+                          onClick={() => handleContact(order)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
     </div>
