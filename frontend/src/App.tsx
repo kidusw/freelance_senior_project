@@ -54,6 +54,7 @@ const App = () => {
           path: "/",
           element: <Home />,
         },
+        { path: "/register", element: <Register /> },
         {
           path: "/profile",
           element: <Profile />,
@@ -123,7 +124,7 @@ const App = () => {
         { path: "categories", element: <AdminCategories /> },
       ],
     },
-    { path: "/register", element: <Register /> },
+
     { path: "/login", element: <Login /> },
     { path: "/payment/:id", element: <Payment /> },
     { path: "*", element: <NotFound /> }, // Catch-all route

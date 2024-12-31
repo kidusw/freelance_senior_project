@@ -69,13 +69,14 @@ const Register = () => {
   };
 
   return (
-    <div className=" bg-gradient-to-r from-teal-200 to-teal-500 w-[70%] mx-auto m-10 rounded-lg">
-      <div className="max-w-[600px] mx-auto font-[sans-serif] p-6 mt-20 flex flex-col item-center">
-        <div className="mb-16 self-center">
-          `<h3 className="text-white text-2xl font-bold">Create an account</h3>
+    <div className=" w-[90%] mx-auto m-10 rounded-lg">
+      <hr className="  w-full h-3 bg-blue-500" />
+      <div className="max-w[750px] mx-auto font-[sans-serif] p-6 mt-20 flex flex-col item-center">
+        <div className="mb-8 ">
+          `<h3 className=" text-2xl font-bold">Create an account</h3>
         </div>
         {isLoading ? (
-          <div className="text-">
+          <div className="">
             <h4 className="text-gray-600 text-lg text-center">
               Creating account...
             </h4>
@@ -85,20 +86,20 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className="grid sm:grid-cols gap-8">
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Username
                 </label>
                 <input
                   name="username"
                   type="text"
                   placeholder="johndoe"
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                   required
                   onChange={handleChange}
                 />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Email
                 </label>
                 <input
@@ -106,32 +107,32 @@ const Register = () => {
                   type="email"
                   placeholder="email"
                   onChange={handleChange}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Password
                 </label>
                 <input
                   name="password"
                   type="password"
+                  placeholder="password"
                   onChange={handleChange}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label
+                  htmlFor=""
+                  className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"
+                >
                   Profile Picture
                 </label>
-                <input
-                  type="file"
-                  onChange={handleFile}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
-                />
+                <input type="file" onChange={handleFile} className="" />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Country
                 </label>
                 <input
@@ -139,11 +140,11 @@ const Register = () => {
                   type="text"
                   placeholder="Usa"
                   onChange={handleChange}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Activate the seller account
                 </label>
                 {sellerButton ? (
@@ -153,7 +154,7 @@ const Register = () => {
                 )}
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Phone Number
                 </label>
                 <input
@@ -161,11 +162,11 @@ const Register = () => {
                   type="text"
                   placeholder="+1 234 567 89"
                   onChange={handleChange}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                 />
               </div>
               <div>
-                <label htmlFor="" className="text-gray-800 text-sm mb-2 block">
+                <label htmlFor="" className="text-gray-800  mb-2 block">
                   Description
                 </label>
                 <textarea
@@ -175,12 +176,12 @@ const Register = () => {
                   cols={30}
                   rows={10}
                   onChange={handleChange}
-                  className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
+                  className="bg-gray-100 w-full text-gray-800  px-4 py-3.5 rounded-md focus:bg-transparent outline-blue-500 transition-all"
                 />
               </div>
               <button
                 type="submit"
-                className="py-3.5 px-7 text-sm font-semibold tracking-wider rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none"
+                className="py-3.5 px-7  font-semibold tracking-wider rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none"
               >
                 Register
               </button>
