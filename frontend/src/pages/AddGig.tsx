@@ -150,14 +150,11 @@ const Add = () => {
   };
   console.log(gigData.features[0]);
   return (
-    <div className="add mt-32 flex justify-center ">
-      <div className="container lg:w-[80%] py-12 px-0">
-        <h1 className="text-gray-500 font-light text-3xl mb-7">Add New Gig</h1>
-        <form
-          className="sections flex justify-around w-full flex-wrap"
-          onSubmit={handleSubmit}
-        >
-          <div className="info flex flex-col gap-3 justify-between ">
+    <div className="add mt-32 lg:max-w-[70%] mx-auto ">
+      <div className="container  py-12 px-0">
+        <h1 className=" font-light text-3xl mb-7">Add New Gig</h1>
+        <form className="sections " onSubmit={handleSubmit}>
+          <div>
             <label htmlFor="title">Title</label>
             <input
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -169,9 +166,12 @@ const Add = () => {
               onChange={handleChange}
               required
             />
+          </div>
 
+          <div className="my-8">
             <label htmlFor="cat">Category</label>
             <select
+              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               name="cat"
               id="cat"
               value={gigData.cat}
@@ -193,28 +193,55 @@ const Add = () => {
               <option value="video editing">video editing</option>
               <option value="seo">SEO</option>
             </select>
+          </div>
 
-            <div className="images">
-              <label htmlFor="coverImage">Cover Image</label>
-              <input
-                name="coverImage"
-                type="file"
-                id="coverImage"
-                onChange={handleSingleFile}
-              />
-              <label htmlFor="images">Upload Images</label>
-              <input
-                name="images"
-                type="file"
-                id="images"
-                multiple
-                onChange={handleMultipleFiles}
-              />
-              <button type="button" onClick={handleUpload} disabled={uploading}>
-                {uploading ? "Uploading..." : "Upload"}
-              </button>
+          <p className="">Select Images: </p>
+          <div className="images flex gap-8 items-center">
+            <div className="flex gap-2">
+              <div className="">
+                <label
+                  className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"
+                  htmlFor="coverImage"
+                >
+                  Cover Image
+                </label>
+                <input
+                  name="coverImage"
+                  type="file"
+                  id="coverImage"
+                  className="hidden"
+                  onChange={handleSingleFile}
+                />
+              </div>
+              <div>
+                <label
+                  className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"
+                  htmlFor="images"
+                >
+                  Upload Images
+                </label>
+                <input
+                  name="images"
+                  type="file"
+                  id="images"
+                  multiple
+                  className="hidden"
+                  onChange={handleMultipleFiles}
+                />
+              </div>
             </div>
 
+            <button
+              className="py-2 px-4 bg-green-500 text-white rounded-lg"
+              type="button"
+              onClick={handleUpload}
+              disabled={uploading}
+            >
+              {uploading ? "Uploading..." : "Upload"}
+            </button>
+          </div>
+
+          <div className="my-8">
             <label htmlFor="desc">Description</label>
             <textarea
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -227,8 +254,7 @@ const Add = () => {
               required
             ></textarea>
           </div>
-
-          <div className="details flex flex-col gap-3 justify-between">
+          <div className="my-8">
             <label htmlFor="shortTitle">Service Title</label>
             <input
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -240,7 +266,9 @@ const Add = () => {
               onChange={handleChange}
               required
             />
+          </div>
 
+          <div className="my-8">
             <label htmlFor="shortDesc">Short Description</label>
             <textarea
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -252,7 +280,9 @@ const Add = () => {
               onChange={handleChange}
               required
             ></textarea>
+          </div>
 
+          <div className="my-8">
             <label htmlFor="deliveryTime">Delivery Time (days)</label>
             <input
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -264,7 +294,9 @@ const Add = () => {
               min="1"
               required
             />
+          </div>
 
+          <div className="my-8">
             <label htmlFor="revisionNumber">Revision Number</label>
             <input
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -276,7 +308,9 @@ const Add = () => {
               min="0"
               required
             />
+          </div>
 
+          <div className="">
             <label htmlFor="feature">Add Features</label>
             <input
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
@@ -287,24 +321,28 @@ const Add = () => {
               value={featureInput}
               onChange={handleFeatureInputChange}
             />
-            <button type="submit" onClick={handleAddFeature}>
-              Add
-            </button>
+          </div>
+          <button
+            className=" my-3 text-white py-2 px-3 bg-blue-600 cursor-pointer"
+            type="submit"
+            onClick={handleAddFeature}
+          >
+            Add
+          </button>
 
-            <div className="addedFeatures">
-              {gigData.features.map((f, index) => (
-                <div className="item flex items-center" key={index}>
-                  <span>{f}</span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveFeature(f)}
-                    className="ml-2 text-red-500"
-                  >
-                    X
-                  </button>
-                </div>
-              ))}
-            </div>
+          <div className="addedFeatures">
+            {gigData.features.map((f, index) => (
+              <div className="item flex items-center" key={index}>
+                <span>{f}</span>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveFeature(f)}
+                  className="ml-2 text-red-500"
+                >
+                  X
+                </button>
+              </div>
+            ))}
 
             <label htmlFor="price">Price ($)</label>
             <input
@@ -322,7 +360,12 @@ const Add = () => {
                 Create
               </button>
             ) : (
-              <button type="submit">Create</button>
+              <button
+                type="submit"
+                className="w-full py-2 text-center bg-blue-600 my-3 text-white hover:bg-blue-700"
+              >
+                Create
+              </button>
             )}
           </div>
         </form>
