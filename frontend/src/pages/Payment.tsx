@@ -108,6 +108,7 @@ const Payment = () => {
         <div className=" p-4 shadow-2xl shadow-black broder border-2 border-gray-300 rounded-lg flex flex-col gap-y-3">
           <label htmlFor="first_name">First Name </label>
           <input
+            required
             className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="text"
             name="first_name"
@@ -119,6 +120,7 @@ const Payment = () => {
           />
           <label htmlFor="last_name">Last Name</label>
           <input
+            required
             className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="text"
             name="last_name"
@@ -130,6 +132,7 @@ const Payment = () => {
           />
           <label htmlFor="email">Email</label>
           <input
+            required
             className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="email"
             name="email"
@@ -139,8 +142,9 @@ const Payment = () => {
               setEmail(e.target.value)
             }
           />
-          <div></div>
+
           <input
+            required
             className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             placeholder="Amout"
             type="hidden"
@@ -177,7 +181,12 @@ const Payment = () => {
             <input type="hidden" name="first_name" value={firstName} />
             <input type="hidden" name="last_name" value={lastName} />
           </div>
-          <button type="submit">Go to chapa</button>
+          <button
+            type="submit"
+            className="cursor-pointer text-white px-4 py-2 bg-blue-500 hover:bg-blue-700"
+          >
+            Go to chapa
+          </button>
         </form>
       )}
     </div>
