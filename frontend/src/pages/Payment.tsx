@@ -89,7 +89,7 @@ const Payment = () => {
   console.log(phone);
   console.log(email);
   return (
-    <div className="">
+    <div className="flex flex-col max-w-[700px] mx-auto justify-between">
       {/* {alertVisible && (
         <CustomAlert
           message={alertMessage}
@@ -97,30 +97,32 @@ const Payment = () => {
           // onClose={() => setAlertVisible(false)}
         />
       )} */}
-      <h2>Payment Page</h2>
-      <form onSubmit={handleSubmit}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            height: 500,
-            width: 700,
-          }}
-        >
-          <label htmlFor="first_name">First Name</label>
+      <h2 className="text-center text-4xl mt-8 uppercase underline">
+        Payment Page
+      </h2>
+      <p className="my-4 text-xl text-red-400">
+        Please Take Schreenshot of your chapa{" "}
+        <b className="font-normal text-2xl text-red-700">receipt</b>
+      </p>
+      <form onSubmit={handleSubmit} className="font-[sans-serif]">
+        <div className=" p-4 shadow-2xl shadow-black broder border-2 border-gray-300 rounded-lg flex flex-col gap-y-3">
+          <label htmlFor="first_name">First Name </label>
           <input
+            className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="text"
             name="first_name"
             value={firstName}
+            placeholder="First Name"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setFname(e.target.value)
             }
           />
           <label htmlFor="last_name">Last Name</label>
           <input
+            className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="text"
             name="last_name"
+            // pattern="Last Name"
             value={lastName}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setLname(e.target.value)
@@ -128,14 +130,25 @@ const Payment = () => {
           />
           <label htmlFor="email">Email</label>
           <input
+            className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             type="email"
             name="email"
             value={email}
+            placeholder="Email"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setEmail(e.target.value)
             }
           />
-          <input type="number" disabled name="amount" value={amount} />
+          <div></div>
+          <input
+            className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
+            placeholder="Amout"
+            type="hidden"
+            disabled
+            name="amount"
+            value={amount}
+          />
+          <h3 className="font-ligth text-2xl "> PRICE: {amount} BIRR</h3>
 
           <input
             type="hidden"
@@ -143,7 +156,10 @@ const Payment = () => {
             value="http://localhost:5173/success"
           />
           {!redirect && (
-            <button type="submit" className="bg-purple-200 px-4 py-2 rounded">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+            >
               Initialize payment
             </button>
           )}

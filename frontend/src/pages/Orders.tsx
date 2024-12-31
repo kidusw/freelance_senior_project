@@ -137,7 +137,9 @@ const Orders = () => {
                         <img className="image w-32" src={order.img} alt="" />
                       </td>
                       <td className="p-4 text-xl text-black">{order.title}</td>
-                      <td className="p-4 text-sm text-black">{order.price} Birr.</td>
+                      <td className="p-4 text-sm text-black">
+                        {order.price} Birr.
+                      </td>
                       <td className="p-4 text-sm text-black">
                         {order.isCompleted}
                       </td>
