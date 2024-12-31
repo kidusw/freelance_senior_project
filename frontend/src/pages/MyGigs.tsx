@@ -75,7 +75,7 @@ const MyGigs = () => {
   };
   return (
     <>
-      <div className="myGigs flex justify-center mt-20">
+      <div className=" lg:max-w-[90%] mx-auto myGigs flex  mt-32 lg:min-h-[300px]">
         {!isLoading ? (
           <div className="container lg:w-[90%] py-12 px-0">
             <div className="title flex items-center justify-between">
@@ -85,8 +85,8 @@ const MyGigs = () => {
               {currentUser?.isSeller && (
                 <Link to="/add">
                   <button
-                    className="bg-green-600 hover:bg-green-500 py-2 px-3 rounded-md
-               text-white font-medium border-none cursor-pointer"
+                    className="bg-green-600 hover:bg-green-500 py-2 px-3 my-3 rounded-md
+               text-white font-medium border-none cursor-pointer self-start"
                   >
                     Add New Gig
                   </button>
@@ -94,21 +94,33 @@ const MyGigs = () => {
               )}
             </div>
             <table className="w-full table-fixed h-full">
-              <tr className="mb-6 ">
-                <th className="text-left">Image</th>
-                <th className="text-left">Title</th>
-                <th className="text-left">Price</th>
-                <th className="text-left">Sales</th>
-                <th className="text-left">Action</th>
-              </tr>
+              <thead className="bg-gray-800  mb-6">
+                <tr className="my-6 ">
+                  <th className="p-4 text-left text-sm font-medium text-white">
+                    Image
+                  </th>
+                  <th className="p-4 text-left text-sm font-medium text-white">
+                    Title
+                  </th>
+                  <th className="p-4 text-left text-sm font-medium text-white">
+                    Price
+                  </th>
+                  <th className="p-4 text-left text-sm font-medium text-white">
+                    Sales
+                  </th>
+                  <th className="p-4 text-left text-sm font-medium text-white">
+                    Action
+                  </th>
+                </tr>
+              </thead>
 
-              <tbody className="">
+              <tbody className="mt-24">
                 {data?.map((gig: GigData) => (
                   <tr className="even:bg-blue-50" key={gig._id}>
                     <Link to={`/singlegig/${gig._id}`}>
                       <td>
                         <img
-                          className="image w-12 h-6 object-cover"
+                          className="image w-32 h-full  object-cover"
                           src={gig.cover}
                           alt=""
                         />
@@ -117,15 +129,23 @@ const MyGigs = () => {
                     <td>{gig.title}</td>
                     <td>{gig.price}</td>
                     <td>{gig.sales}</td>
-                    <td>
+                    <td style={{ cursor: "pointer" }}>
+                      <img
+                        className="delete w-8"
+                        src="./img/delete.png"
+                        alt=""
+                        onClick={() => handleDelete()}
+                      />
+                    </td>
+                    <td className="">
                       {" "}
                       {deleteUser && (
                         <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-                          <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
+                          <div className=" bg-white shadow-lg rounded-lg p-6 relative">
                             <svg
                               onClick={() => setDeleteUser(false)}
                               xmlns="http://www.w3.org/2000/svg"
-                              className="w-3.5 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500 float-right"
+                              className="w-8 cursor-pointer shrink-0 fill-gray-400 hover:fill-red-500 float-right"
                               viewBox="0 0 320.591 320.591"
                             >
                               <path
@@ -178,22 +198,22 @@ const MyGigs = () => {
                         </div>
                       )}
                     </td>
-
-                    <td style={{ cursor: "pointer" }}>
-                      <img
-                        className="delete"
-                        src="./img/delete.png"
-                        alt=""
-                        onClick={() => handleDelete()}
-                      />
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <h1>Loading...</h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-10 animate-[spin_0.8s_linear_infinite] fill-blue-600 block mx-auto"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
+              data-original="#000000"
+            />
+          </svg>
         )}
       </div>
     </>
