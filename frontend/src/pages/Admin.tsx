@@ -46,7 +46,7 @@ const Admin = () => {
     navigate("/admin/login");
   };
   return (
-    <div className="grid grid-cols-[250px_1fr] h-screen  mb-4">
+    <div className="grid grid-cols-[250px_1fr] h-screen  mb-4 mt-24">
       <div className="left flex flex-col items-center pt-1 gap-4 bg-slate-300 overflow-y-scroll py-10">
         <h3 className="text-2xl">Dashboard</h3>
         <Link
